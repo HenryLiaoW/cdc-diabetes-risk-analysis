@@ -1,0 +1,77 @@
+# Python code files - DO NOT UPLOAD
+*.py
+src/*.py
+src/**/*.py
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook - DO NOT UPLOAD
+.ipynb_checkpoints
+*.ipynb
+notebooks/
+
+# Virtual Environment
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Documentation folder - DO NOT UPLOAD
+doc/
+docs/
+
+# Project structure - DO NOT UPLOAD
+PROJECT_STRUCTURE.md
+
+# Outputs folder - DO NOT UPLOAD
+outputs/
+
+# Data folder - KEEP ALL FILES IN data/
+# (Remove CSV exclusion to allow data upload)
+
+# Model files (if large)
+models/*.pkl
+models/*.h5
+models/*.joblib
+
+# Logs
+logs/*.log
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Root level CSV files (generated reports)
+/*.csv
