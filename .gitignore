@@ -54,12 +54,11 @@ docs/
 # Allow project structure
 !PROJECT_STRUCTURE.md
 
-# Outputs folder - Keep key exploration results
+# Outputs folder - Ignore all outputs
 outputs/clustering/
 outputs/classification/
+outputs/exploration/
 outputs/report/
-# Allow exploration outputs
-!outputs/exploration/
 
 # Data folder - KEEP ALL FILES IN data/
 # (Remove CSV exclusion to allow data upload)
