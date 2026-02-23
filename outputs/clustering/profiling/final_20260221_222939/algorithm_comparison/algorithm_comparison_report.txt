@@ -1,0 +1,91 @@
+================================================================================
+Clustering Algorithm Comparison Report
+================================================================================
+
+Generated: 2026-02-22 20:05:50
+Dataset: kmeans_k6_complete_LATEST.csv
+Total Samples: 229,781
+Features: 5 (5 Pillars)
+
+================================================================================
+Performance Metrics Comparison
+================================================================================
+
+   Algorithm                           Parameters  N_Clusters  N_Noise  Silhouette_Score  Davies_Bouldin_Index  Calinski_Harabasz_Score  AtRisk_Rate_Range  AtRisk_Rate_Min  AtRisk_Rate_Max
+     K-Means                       K=6, n_init=50           6      NaN          0.222123              1.390233             45844.466243          28.621870        10.162868        38.784738
+Hierarchical Ward linkage, K=6 (sampled N=50,000)           6      NaN          0.160077              1.739208              7152.515434          24.701714         7.139909        31.841624
+      DBSCAN              eps=0.5, min_samples=50          51   8602.0          0.146928              2.308551              8657.847162          52.410802         1.273408        53.684211
+         GMM                 K=6, covariance=full           6      NaN          0.178866              1.630598             28161.041271          25.966473         8.474390        34.440863
+
+================================================================================
+Metric Interpretation
+================================================================================
+
+1. Silhouette Score (Range: -1 to 1)
+   • Measures cluster cohesion and separation
+   • Higher is better (>0.5 = strong, 0.2-0.5 = acceptable, <0.2 = weak)
+   • Optimal: K-Means or GMM typically perform best
+
+2. Davies-Bouldin Index (Range: 0 to ∞)
+   • Measures cluster separation relative to cluster compactness
+   • Lower is better (<1.0 = good separation)
+   • Optimal: Hierarchical often achieves low scores
+
+3. Calinski-Harabasz Score (Range: 0 to ∞)
+   • Ratio of between-cluster to within-cluster variance
+   • Higher is better (>1000 generally indicates well-defined clusters)
+   • Optimal: K-Means often scores highest due to spherical cluster assumption
+
+4. At-Risk Rate Stratification Range
+   • Difference between highest and lowest cluster At-Risk rates
+   • Higher indicates better risk differentiation for clinical utility
+   • Optimal: Should maximize range for effective population stratification
+
+================================================================================
+Algorithm Characteristics
+================================================================================
+
+K-Means (BASELINE):
+  ✓ Assumes spherical, equally-sized clusters
+  ✓ Fast and scalable
+  ✓ Requires pre-specified K
+  ✓ Sensitive to initialization (mitigated by n_init=50)
+
+Hierarchical Clustering:
+  ✓ No assumption on cluster shape
+  ✓ Deterministic (no random initialization)
+  ✓ Can explore different K via dendrogram
+  ✗ Computationally expensive for large datasets
+
+DBSCAN:
+  ✓ Discovers arbitrary-shaped clusters
+  ✓ Automatically determines number of clusters
+  ✓ Identifies outliers (noise points)
+  ✗ Sensitive to eps and min_samples parameters
+  ✗ Struggles with varying density clusters
+
+Gaussian Mixture Model (GMM):
+  ✓ Assumes Gaussian distribution of clusters
+  ✓ Soft clustering (probabilistic assignment)
+  ✓ More flexible than K-Means (elliptical clusters)
+  ✗ Requires pre-specified K
+  ✗ Can converge to local optima
+
+================================================================================
+Recommendation
+================================================================================
+
+Based on Silhouette Score: **K-Means** (Score: 0.2221)
+
+However, for this diabetes risk stratification task:
+  • K-Means remains the BASELINE choice due to:
+    1. Computational efficiency (N=229,781 samples)
+    2. Interpretability (clear cluster centroids)
+    3. Clinical utility (fixed K=6 for intervention design)
+    4. Consistent performance across multiple metrics
+    5. Strong At-Risk rate stratification
+
+  • Alternative algorithms may be considered if:
+    - Non-spherical cluster shapes are suspected (→ GMM or Hierarchical)
+    - Outlier detection is required (→ DBSCAN)
+    - Exploratory analysis without fixed K (→ Hierarchical or DBSCAN)

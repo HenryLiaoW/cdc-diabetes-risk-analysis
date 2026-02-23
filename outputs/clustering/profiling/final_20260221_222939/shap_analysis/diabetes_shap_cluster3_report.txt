@@ -1,0 +1,36 @@
+================================================================================
+SHAP Analysis: Diabetes Risk Within Cluster 3
+================================================================================
+
+Timestamp: 2026-02-22 20:54:33
+Target: Diabetes_012 (Diabetes status)
+Cluster: 3
+Samples: 28,355
+
+Diabetes Distribution:
+  No Diabetes: 61.22% (17,359 samples)
+  Prediabetes: 3.51% (994 samples)
+  Diabetes: 35.27% (10,002 samples)
+
+Model Performance:
+  Random Forest - Accuracy: 0.5073, F1: 0.5471
+  XGBoost - Accuracy: 0.6336, F1: 0.5871
+
+SHAP Feature Importance Rankings:
+               Feature  RF_SHAP_Importance  XGB_SHAP_Importance  RF_Rank  XGB_Rank
+    metabolic_baseline            0.057771             0.198808        1         1
+chronic_disease_burden            0.036560             0.114978        2         2
+     ses_vulnerability            0.018675             0.066042        3         3
+        substance_risk            0.013250             0.044902        4         4
+        lifestyle_risk            0.010071             0.032232        5         5
+
+================================================================================
+INTERPRETATION
+================================================================================
+This analysis shows which features drive diabetes risk WITHIN Cluster 3.
+Higher SHAP values = stronger influence on diabetes prediction.
+
+Key findings:
+  - metabolic_baseline: RF Rank #1, XGB Rank #1
+  - chronic_disease_burden: RF Rank #2, XGB Rank #2
+  - ses_vulnerability: RF Rank #3, XGB Rank #3

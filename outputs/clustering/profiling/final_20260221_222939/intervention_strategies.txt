@@ -1,0 +1,162 @@
+================================================================================
+CLUSTER-SPECIFIC INTERVENTION STRATEGIES
+================================================================================
+
+Analysis Date: 2026-02-22 19:16:05
+Total Population: 229,781
+Clustering Method: K-Means (K=6)\nFeatures: 5 composite indicators\n\n================================================================================
+CLUSTER 0: LOW-RISK
+================================================================================
+
+Population Size: 78,442 (34.1%)
+
+RISK PROFILE:
+  • Chronic Disease Burden: 0.45/5.0
+  • Metabolic Baseline (BMI): 26.6
+  • Lifestyle Risk: 0.40/3.0
+  • Addiction Risk: 0.46/2.0
+  • SES Vulnerability: 4.2/17.0
+
+DIABETES PREVALENCE:
+  • No Diabetes: 93.4%
+  • At-Risk (Prediabetes + Diabetes): 6.6%
+    - Prediabetes: 1.0%
+    - Diabetes: 5.6%
+
+CLINICAL DESCRIPTION:
+  Healthy baseline population with minimal risk factors
+
+RECOMMENDED INTERVENTIONS:
+  Preventive care, health promotion, annual screening
+
+
+================================================================================
+CLUSTER 1: SOCIOECONOMIC VULNERABILITY
+================================================================================
+
+Population Size: 38,072 (16.6%)
+
+RISK PROFILE:
+  • Chronic Disease Burden: 0.63/5.0
+  • Metabolic Baseline (BMI): 26.6
+  • Lifestyle Risk: 0.53/3.0
+  • Addiction Risk: 0.53/2.0
+  • SES Vulnerability: 9.0/17.0
+
+DIABETES PREVALENCE:
+  • No Diabetes: 88.2%
+  • At-Risk (Prediabetes + Diabetes): 11.8%
+    - Prediabetes: 1.9%
+    - Diabetes: 10.0%
+
+CLINICAL DESCRIPTION:
+  High socioeconomic barriers limiting healthcare access
+
+RECOMMENDED INTERVENTIONS:
+  Free screening, community health workers, simplified education materials
+
+
+================================================================================
+CLUSTER 2: HIGH-RISK LIFESTYLE
+================================================================================
+
+Population Size: 31,165 (13.6%)
+
+RISK PROFILE:
+  • Chronic Disease Burden: 0.86/5.0
+  • Metabolic Baseline (BMI): 28.1
+  • Lifestyle Risk: 2.24/3.0
+  • Addiction Risk: 0.54/2.0
+  • SES Vulnerability: 5.6/17.0
+
+DIABETES PREVALENCE:
+  • No Diabetes: 86.8%
+  • At-Risk (Prediabetes + Diabetes): 13.2%
+    - Prediabetes: 1.7%
+    - Diabetes: 11.5%
+
+CLINICAL DESCRIPTION:
+  Poor behavioral profiles with high intervention potential
+
+RECOMMENDED INTERVENTIONS:
+  Nutrition education, community exercise programs, cooking classes
+
+
+================================================================================
+CLUSTER 3: CHRONIC-ADDICTION SYNERGY
+================================================================================
+
+Population Size: 39,426 (17.2%)
+
+RISK PROFILE:
+  • Chronic Disease Burden: 2.40/5.0
+  • Metabolic Baseline (BMI): 28.4
+  • Lifestyle Risk: 0.47/3.0
+  • Addiction Risk: 0.57/2.0
+  • SES Vulnerability: 4.9/17.0
+
+DIABETES PREVALENCE:
+  • No Diabetes: 74.1%
+  • At-Risk (Prediabetes + Diabetes): 25.9%
+    - Prediabetes: 2.8%
+    - Diabetes: 23.1%
+
+CLINICAL DESCRIPTION:
+  Chronic disease burden compounded by addiction behaviors
+
+RECOMMENDED INTERVENTIONS:
+  Integrated chronic disease management, addiction treatment support
+
+
+================================================================================
+CLUSTER 4: METABOLIC EXTREMES
+================================================================================
+
+Population Size: 14,321 (6.2%)
+
+RISK PROFILE:
+  • Chronic Disease Burden: 1.50/5.0
+  • Metabolic Baseline (BMI): 45.1
+  • Lifestyle Risk: 1.01/3.0
+  • Addiction Risk: 0.47/2.0
+  • SES Vulnerability: 6.4/17.0
+
+DIABETES PREVALENCE:
+  • No Diabetes: 67.1%
+  • At-Risk (Prediabetes + Diabetes): 32.9%
+    - Prediabetes: 3.2%
+    - Diabetes: 29.8%
+
+CLINICAL DESCRIPTION:
+  Severe obesity driving metabolic syndrome and diabetes
+
+RECOMMENDED INTERVENTIONS:
+  Weight management programs, dietary counseling, bariatric evaluation
+
+
+================================================================================
+CLUSTER 5: FRAIL MULTI-MORBIDITY
+================================================================================
+
+Population Size: 28,355 (12.3%)
+
+RISK PROFILE:
+  • Chronic Disease Burden: 2.84/5.0
+  • Metabolic Baseline (BMI): 30.0
+  • Lifestyle Risk: 1.53/3.0
+  • Addiction Risk: 0.64/2.0
+  • SES Vulnerability: 9.8/17.0
+
+DIABETES PREVALENCE:
+  • No Diabetes: 61.2%
+  • At-Risk (Prediabetes + Diabetes): 38.8%
+    - Prediabetes: 3.5%
+    - Diabetes: 35.3%
+
+CLINICAL DESCRIPTION:
+  Multiple chronic conditions with complex care needs
+
+RECOMMENDED INTERVENTIONS:
+  Intensive case management, medication adherence, specialist referrals
+
+

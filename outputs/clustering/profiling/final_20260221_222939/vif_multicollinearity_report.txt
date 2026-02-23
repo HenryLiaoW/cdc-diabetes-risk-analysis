@@ -1,0 +1,105 @@
+================================================================================
+VIF & MULTICOLLINEARITY ANALYSIS REPORT
+================================================================================
+
+Analysis Date: 2026-02-22 13:46:25
+Dataset Size: 229,781 records
+Number of Features: 5 composite features
+
+================================================================================
+1. VIF RESULTS (Variance Inflation Factor)
+================================================================================
+
+                 Feature      VIF                   Interpretation
+Metabolic Baseline (BMI) 1.054398 Excellent (No multicollinearity)
+  Chronic Disease Burden 1.119706 Excellent (No multicollinearity)
+          Lifestyle Risk 1.062503 Excellent (No multicollinearity)
+          Substance Risk 1.018876 Excellent (No multicollinearity)
+       SES Vulnerability 1.103943 Excellent (No multicollinearity)
+
+Overall Assessment: EXCELLENT - No multicollinearity detected
+Maximum VIF: 1.120
+Recommendation: All features are suitable for use. Proceed with confidence.
+
+================================================================================
+2. CORRELATION MATRIX
+================================================================================
+
+                          Metabolic Baseline (BMI)  Chronic Disease Burden  Lifestyle Risk  Substance Risk  SES Vulnerability
+Metabolic Baseline (BMI)                  1.000000                0.197643        0.120401       -0.032296           0.082083
+Chronic Disease Burden                    0.197643                1.000000        0.138117        0.102670           0.250699
+Lifestyle Risk                            0.120401                0.138117        1.000000        0.059934           0.202584
+Substance Risk                           -0.032296                0.102670        0.059934        1.000000           0.079717
+SES Vulnerability                         0.082083                0.250699        0.202584        0.079717           1.000000
+
+================================================================================
+3. TOP PAIRWISE CORRELATIONS
+================================================================================
+
+               Feature_1              Feature_2  Correlation  Abs_Correlation
+  Chronic Disease Burden      SES Vulnerability     0.250699         0.250699
+          Lifestyle Risk      SES Vulnerability     0.202584         0.202584
+Metabolic Baseline (BMI) Chronic Disease Burden     0.197643         0.197643
+  Chronic Disease Burden         Lifestyle Risk     0.138117         0.138117
+Metabolic Baseline (BMI)         Lifestyle Risk     0.120401         0.120401
+  Chronic Disease Burden         Substance Risk     0.102670         0.102670
+Metabolic Baseline (BMI)      SES Vulnerability     0.082083         0.082083
+          Substance Risk      SES Vulnerability     0.079717         0.079717
+          Lifestyle Risk         Substance Risk     0.059934         0.059934
+Metabolic Baseline (BMI)         Substance Risk    -0.032296         0.032296
+
+✓ No high correlations detected (all |r| < 0.7)
+
+================================================================================
+4. DESCRIPTIVE STATISTICS
+================================================================================
+
+                 Feature      mean      std  min  25%  50%  75%  max
+Metabolic Baseline (BMI) 28.685670 6.786360 12.0 24.0 27.0 32.0 98.0
+  Chronic Disease Burden  1.229680 1.146389  0.0  0.0  1.0  2.0  5.0
+          Lifestyle Risk  0.858866 0.890993  0.0  0.0  1.0  1.0  3.0
+          Substance Risk  0.526371 0.573349  0.0  0.0  0.0  1.0  2.0
+       SES Vulnerability  6.129049 2.665860  3.0  4.0  6.0  8.0 15.0
+
+================================================================================
+5. METHODOLOGY EXPLANATION
+================================================================================
+
+VIF (Variance Inflation Factor) Calculation:
+  For each feature X_i, VIF_i measures how much the variance of the
+  estimated coefficient is inflated by collinearity with other features.
+
+  Formula: VIF_i = 1 / (1 - R²_i)
+  Where R²_i is from regressing X_i on all other features.
+
+Interpretation:
+  • VIF = 1: No correlation with other features (ideal)
+  • VIF < 5: Low multicollinearity (acceptable)
+  • 5 ≤ VIF < 10: Moderate multicollinearity (monitor)
+  • VIF ≥ 10: High multicollinearity (action required)
+
+================================================================================
+6. ACADEMIC REPORTING TEMPLATE
+================================================================================
+
+To ensure the structural integrity of the feature space and avoid
+redundant weighting in the K-Means distance calculation, a
+Multicollinearity Diagnostic was performed using the Variance Inflation
+Factor (VIF). By aggregating twelve primary variables into five distinct
+composite domains—Metabolic (BMI), Clinical (Chronic Disease Burden),
+Behavioral (Lifestyle & Substance), and Socioeconomic (SES Vulnerability)—
+the model effectively minimised inter-feature correlation.
+
+All selected features yielded VIF values below the critical threshold of
+1.12, confirming that each composite metric provides unique
+explanatory power for the subsequent diabetes risk stratification.
+The maximum pairwise correlation was 0.251,
+well below the multicollinearity concern threshold of 0.7.
+
+================================================================================
+7. CONCLUSION
+================================================================================
+
+✅ PASSED: The 5 composite features demonstrate excellent independence.
+   No multicollinearity concerns. Feature engineering is validated.
+   Suitable for K-Means clustering and subsequent analysis.

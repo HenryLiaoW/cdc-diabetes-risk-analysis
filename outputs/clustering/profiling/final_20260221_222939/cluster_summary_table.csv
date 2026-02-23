@@ -1,0 +1,7 @@
+Cluster,Population,Diabetes Rate,Label,Core Features
+0,"78,442 (34.1%)",5.6%,Moderate Risk Group,Overall Low Risk
+1,"38,072 (16.6%)",10.0%,Moderate Risk Group,High SES Vulnerability (9.0)
+2,"31,165 (13.6%)",11.5%,Poor Lifestyle Group,Very High Lifestyle Risk (2.24)
+3,"39,426 (17.2%)",23.1%,Moderate Risk Group,High Chronic Disease (2.40)
+4,"14,321 (6.2%)",29.8%,Metabolic Risk Group,Very High BMI (45.1)
+5,"28,355 (12.3%)",35.3%,Multi-Morbidity Group,Very High Chronic Disease (2.84); High Lifestyle Risk (1.53); High SES Vulnerability (9.8)

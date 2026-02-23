@@ -1,0 +1,6 @@
+Feature,RF_Gini_Importance,RF_SHAP_Importance,XGB_Gain_Importance,XGB_SHAP_Importance,RF_Gini_Importance_Rank,RF_SHAP_Importance_Rank,XGB_Gain_Importance_Rank,XGB_SHAP_Importance_Rank
+chronic_disease_burden,0.243106,0.121156,0.322866,1.746443,2,1,1,2
+ses_vulnerability,0.302562,0.118867,0.293206,1.850539,1,2,2,1
+lifestyle_risk,0.224803,0.096848,0.284204,1.402251,4,3,3,3
+BMI,0.228479,0.066561,0.097712,1.248188,3,4,4,4
+substance_risk,0.001051,0.001621,0.002013,0.018989,5,5,5,5

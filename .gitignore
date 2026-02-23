@@ -54,8 +54,11 @@ docs/
 # Allow project structure
 !PROJECT_STRUCTURE.md
 
-# Outputs folder - Ignore all outputs
-outputs/clustering/
+# Outputs folder - Ignore all outputs except final results
+outputs/clustering/*
+!outputs/clustering/profiling/
+outputs/clustering/profiling/*
+!outputs/clustering/profiling/final_20260221_222939/
 outputs/classification/
 outputs/exploration/
 outputs/report/

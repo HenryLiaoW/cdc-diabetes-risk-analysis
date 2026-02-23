@@ -1,0 +1,5 @@
+Algorithm,Parameters,N_Clusters,N_Noise,Silhouette_Score,Davies_Bouldin_Index,Calinski_Harabasz_Score,AtRisk_Rate_Range,AtRisk_Rate_Min,AtRisk_Rate_Max
+K-Means,"K=6, n_init=50",6,,0.2221,1.3902,45844.4662,28.6219,10.1629,38.7847
+Hierarchical,"Ward linkage, K=6 (sampled N=50,000)",6,,0.1601,1.7392,7152.5154,24.7017,7.1399,31.8416
+DBSCAN,"eps=0.5, min_samples=50",51,8602.0000,0.1469,2.3086,8657.8472,52.4108,1.2734,53.6842
+GMM,"K=6, covariance=full",6,,0.1789,1.6306,28161.0413,25.9665,8.4744,34.4409

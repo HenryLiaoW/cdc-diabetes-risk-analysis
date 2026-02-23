@@ -1,0 +1,5 @@
+Dimension,5-Feature,6-Feature (including Age),6-Feature (including Sex),Winner
+Silhouette Score (K=6),0.2413,0.1783,0.2354,5-Feature
+Silhouette Score (Average),0.2436,0.1872,0.2388,5-Feature
+Max VIF,1.120,1.354,1.125,5-Feature
+Max Correlation,0.251,0.414,0.251,5-Feature

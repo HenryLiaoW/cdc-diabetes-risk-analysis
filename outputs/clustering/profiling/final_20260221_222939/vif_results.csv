@@ -1,0 +1,6 @@
+Feature,VIF,Interpretation
+Metabolic Baseline (BMI),1.0543979890527184,Excellent (No multicollinearity)
+Chronic Disease Burden,1.119705768937922,Excellent (No multicollinearity)
+Lifestyle Risk,1.0625028518768909,Excellent (No multicollinearity)
+Substance Risk,1.0188756790713251,Excellent (No multicollinearity)
+SES Vulnerability,1.103942838737569,Excellent (No multicollinearity)

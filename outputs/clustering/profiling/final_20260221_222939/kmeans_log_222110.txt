@@ -1,0 +1,156 @@
+================================================================================
+K-MEANS CLUSTERING ANALYSIS LOG
+================================================================================
+Run Timestamp: 2026-02-21 22:21:10
+Number of Features: 5
+Log File: /Users/henry/AAI/FAIDM/CDC_DCDC_Diabetes_Project/outputs/clustering/log/5features_composite_kmeans_run_20260221_222110.txt
+================================================================================
+
+[Step 1] Feature Engineering - Composite Indicators
+============================================================
+Strategy: Dimension aggregation following CRISP-DM framework
+          Address feature redundancy and scale conflicts
+
+Dataset shape: (229781, 5)
+Total features: 5
+
+Composite Feature Design:
+============================================================
+1. chronic_disease_burden (0-5)
+   Formula: HighBP + HighChol + Stroke + HeartDiseaseorAttack + DiffWalk
+   Purpose: Multi-morbidity severity grading
+   Academic Value: Identify high-risk populations with multiple conditions
+
+2. metabolic_baseline (continuous)
+   Formula: BMI (original value)
+   Purpose: Core physiological diabetes predictor
+   Academic Value: Most significant continuous risk factor
+
+3. lifestyle_risk (0-3)
+   Formula: 3 - (Veggies + Fruits + PhysActivity)
+   Purpose: Unhealthy behavior risk indicator (reverse-coded)
+   Academic Value: Unified risk direction for radar chart interpretation
+
+4. substance_risk (0-2)
+   Formula: Smoker + HvyAlcoholConsump
+   Purpose: Addiction behavior intervention targeting
+   Academic Value: Identify cessation support needs
+
+5. ses_vulnerability (0-17)
+   Formula: (10-Income) + (7-Education)
+   Purpose: Vulnerable group identification (FAIR requirement 39)
+   Academic Value: Tailor financial/communication strategies
+
+6. medical_engagement (0-1)
+   Formula: CholCheck (binary preserved)
+   Purpose: Preventive care awareness indicator
+   Academic Value: Distinguish monitored vs. disengaged populations
+
+Design Rationale:
+  ✓ Avoid feature redundancy (no double-counting)
+  ✓ Data-driven scaling based on distribution analysis
+  ✓ Equal-weight assumption for public health fairness
+  ✓ XGBoost will learn true weights in classification phase
+
+Scaling Strategy (Distribution-Based):
+  • RobustScaler: ['metabolic_baseline', 'lifestyle_risk']
+    Reason: Long-tail/Skewed distributions with outliers
+  • StandardScaler: ['chronic_disease_burden', 'ses_vulnerability']
+    Reason: Relatively symmetric distributions
+  • MinMaxScaler: ['substance_risk']
+    Reason: Sparse/Binary-like distribution (51.3% zeros)
+
+[Step 2] Data-Driven Feature Scaling (5 features)
+Mixed scaling strategy (based on distribution analysis):
+  • RobustScaler: metabolic_baseline, lifestyle_risk
+    → Reason: Long-tail/Skewed distributions (|skewness| > 0.7 or outliers > 4%)
+  • StandardScaler: chronic_disease_burden, ses_vulnerability
+    → Reason: Relatively symmetric distributions (|skewness| < 0.75)
+  • MinMaxScaler: substance_risk
+    → Reason: Sparse distribution (51.3% zeros)
+  • REMOVED: medical_engagement (extreme skewness=-4.66, low variance)
+Scaled data shape: (229781, 5)
+
+Note: Scaling strategy determined by distribution analysis report
+      (see outputs/clustering/distribution_analysis/)
+
+[Step 3] K-Means Evaluation
+K range: 2 to 7
+Sample size for Silhouette Score: 50,000
+Sample ratio: 21.76%
+============================================================
+
+K = 2
+  Inertia: 611478.66
+  Silhouette Score: 0.2774
+  Cluster Sizes: {np.int32(0): np.int64(146062), np.int32(1): np.int64(83719)}
+  Cluster Centers shape: (2, 5)
+
+K = 3
+  Inertia: 527199.26
+  Silhouette Score: 0.2368
+  Cluster Sizes: {np.int32(0): np.int64(119013), np.int32(1): np.int64(53563), np.int32(2): np.int64(57205)}
+  Cluster Centers shape: (3, 5)
+
+K = 4
+  Inertia: 462469.48
+  Silhouette Score: 0.2369
+  Cluster Sizes: {np.int32(0): np.int64(48699), np.int32(1): np.int64(45868), np.int32(2): np.int64(98566), np.int32(3): np.int64(36648)}
+  Cluster Centers shape: (4, 5)
+
+K = 5
+  Inertia: 405845.28
+  Silhouette Score: 0.2330
+  Cluster Sizes: {np.int32(0): np.int64(29620), np.int32(1): np.int64(80806), np.int32(2): np.int64(42905), np.int32(3): np.int64(42086), np.int32(4): np.int64(34364)}
+  Cluster Centers shape: (5, 5)
+
+K = 6
+  Inertia: 361732.77
+  Silhouette Score: 0.2413
+  Cluster Sizes: {np.int32(0): np.int64(39426), np.int32(1): np.int64(14321), np.int32(2): np.int64(78442), np.int32(3): np.int64(28355), np.int32(4): np.int64(31165), np.int32(5): np.int64(38072)}
+  Cluster Centers shape: (6, 5)
+
+K = 7
+  Inertia: 338148.79
+  Silhouette Score: 0.2362
+  Cluster Sizes: {np.int32(0): np.int64(35666), np.int32(1): np.int64(22062), np.int32(2): np.int64(78442), np.int32(3): np.int64(33923), np.int32(4): np.int64(19101), np.int32(5): np.int64(27007), np.int32(6): np.int64(13580)}
+  Cluster Centers shape: (7, 5)
+
+============================================================
+RESULTS SUMMARY
+============================================================
+Best K: 2
+Best Silhouette Score: 0.2774
+
+All Results:
+  K=2: Inertia=611478.66, Silhouette=0.2774
+  K=3: Inertia=527199.26, Silhouette=0.2368
+  K=4: Inertia=462469.48, Silhouette=0.2369
+  K=5: Inertia=405845.28, Silhouette=0.2330
+  K=6: Inertia=361732.77, Silhouette=0.2413
+  K=7: Inertia=338148.79, Silhouette=0.2362
+
+Results saved to: /Users/henry/AAI/FAIDM/CDC_DCDC_Diabetes_Project/outputs/clustering/log/5features_composite_kmeans_results_20260221_222110.csv
+============================================================
+
+============================================================
+FINAL MODEL (K=6) - FOR VISUALIZATION
+============================================================
+Silhouette Score: 0.2409
+Inertia: 361732.77
+
+Cluster Distribution:
+  Cluster 0: 39,426 samples (17.16%)
+  Cluster 1: 14,321 samples (6.23%)
+  Cluster 2: 78,442 samples (34.14%)
+  Cluster 3: 28,355 samples (12.34%)
+  Cluster 4: 31,165 samples (13.56%)
+  Cluster 5: 38,072 samples (16.57%)
+
+Complete dataset saved to:
+  • /Users/henry/AAI/FAIDM/CDC_DCDC_Diabetes_Project/outputs/clustering/results/kmeans_k6_complete_20260221_222110.csv
+  • /Users/henry/AAI/FAIDM/CDC_DCDC_Diabetes_Project/outputs/clustering/results/kmeans_k6_complete_LATEST.csv (for cluster_profiling.py)
+============================================================
+
+Analysis completed at: 2026-02-21 22:24:14
+================================================================================
