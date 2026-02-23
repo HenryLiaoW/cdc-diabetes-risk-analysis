@@ -1,0 +1,30 @@
+Factor,Category,Diabetes Rate (%),Sample Size,Risk Ratio
+Age,18-24,1.74,5700,0.11x
+Age,25-29,2.55,7598,0.16x
+Age,30-34,3.47,11123,0.22x
+Age,35-39,5.56,13823,0.35x
+Age,40-44,7.51,16157,0.48x
+Age,45-49,10.36,19819,0.66x
+Age,50-54,13.32,26314,0.85x
+Age,55-59,15.61,30832,0.99x
+Age,60-64,19.36,33244,1.23x
+Age,65-69,22.54,32194,1.43x
+Age,70-74,24.40,23533,1.55x
+Age,75-79,24.08,15980,1.53x
+Age,80+,21.09,17363,1.34x
+Sex,Female,14.80,141974,0.94x
+Sex,Male,16.97,111706,1.08x
+Income,<$10k,27.49,9811,1.74x
+Income,$10-15k,29.21,11783,1.85x
+Income,$15-20k,24.94,15994,1.58x
+Income,$20-25k,22.41,20135,1.42x
+Income,$25-35k,19.67,25883,1.25x
+Income,$35-50k,16.56,36470,1.05x
+Income,$50-75k,13.88,43219,0.88x
+Income,>$75k,9.08,90385,0.58x
+Education,Never/Kindergarten,28.16,174,1.79x
+Education,Elementary,33.24,4043,2.11x
+Education,Some HS,27.54,9478,1.75x
+Education,HS Grad,19.79,62750,1.26x
+Education,Some College,16.72,69910,1.06x
+Education,College Grad,11.06,107325,0.70x

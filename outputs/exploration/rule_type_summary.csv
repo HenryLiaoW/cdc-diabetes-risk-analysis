@@ -1,0 +1,5 @@
+Rule Type,Characteristics,Example,Support Range,Confidence,Lift,Public Health Value
+Independent/Irrelevant,Lift ≈ 1.0,AnyHealthcare → Diabetes,>10%,≈ Baseline (14%),0.95-1.05,None - Ignore
+Extreme High-risk,"High Lift & Confidence, Low Support",Stroke+HeartDisease+DiffWalk → Diabetes,<1%,>40%,>2.0,Targeted intervention for rare high-risk groups
+Golden Rule (★),"Balanced: Moderate Support, High Lift",HighBP+HighChol → Diabetes,5-15%,>25%,1.5-2.5,★ PRIORITY - Population screening & prevention
+Protective Factor,Lift < 1.0,Exercise+Fruits+Veggies → No Diabetes,Any,<14%,<1.0,Identify protective behaviors for education campaigns

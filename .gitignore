@@ -1,7 +1,7 @@
-# Python code files - DO NOT UPLOAD
-*.py
-src/*.py
-src/**/*.py
+# Python code files - Selectively track core code
+# Allow src/ code but ignore cache
+!src/**/*.py
+*.pyc
 
 # Python cache and compiled files
 __pycache__/
@@ -25,10 +25,11 @@ wheels/
 .installed.cfg
 *.egg
 
-# Jupyter Notebook - DO NOT UPLOAD
+# Jupyter Notebook - Keep key analysis notebooks
 .ipynb_checkpoints
-*.ipynb
-notebooks/
+# Allow important notebooks (add specific ones manually)
+!notebooks/EDA_3.*.ipynb
+!notebooks/correlation_analysis_sagemaker.py
 
 # Virtual Environment
 venv/
@@ -47,15 +48,17 @@ env/
 .AppleDouble
 .LSOverride
 
-# Documentation folder - DO NOT UPLOAD
+# Documentation folder - Keep project documentation
 doc/
 docs/
+# Allow project structure
+!PROJECT_STRUCTURE.md
 
-# Project structure - DO NOT UPLOAD
-PROJECT_STRUCTURE.md
-
-# Outputs folder - DO NOT UPLOAD
-outputs/
+# Outputs folder - Keep key exploration results
+outputs/clustering/
+outputs/report/
+# Allow exploration outputs
+!outputs/exploration/
 
 # Data folder - KEEP ALL FILES IN data/
 # (Remove CSV exclusion to allow data upload)
@@ -72,6 +75,10 @@ logs/*.log
 # Temporary files
 *.tmp
 *.temp
+
+# Word documents (binary, not suitable for version control)
+*.docx
+*.doc
 
 # Root level CSV files (generated reports)
 /*.csv

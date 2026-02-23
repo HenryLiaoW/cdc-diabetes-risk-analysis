@@ -1,0 +1,3 @@
+Type,Antecedents,Consequents,Support,Confidence,Lift,Interpretation
+Independent/Irrelevant,CholCheck,AnyHealthcare,0.955,0.961,1.002,Lift≈1.0 means no association. Having these features doesn't change diabetes risk.
+Protective Factor,Age_Middle,"HighBP, CholCheck, AnyHealthcare",0.300,0.668,0.927,Lift<1.0 indicates protective effect. Reduces risk by ~7.3%.

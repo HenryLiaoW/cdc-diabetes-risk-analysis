@@ -1,0 +1,40 @@
+
+CRITICAL QUESTIONS FOR REFLECTION (Include in your report):
+
+1. CORRELATION IS NOT CAUSATION
+   Q: If we find "Healthy Diet (Fruits+Veggies) → Diabetes" with Lift<1, 
+      does it mean eating vegetables PREVENTS diabetes?
+   A: Not necessarily! Possible explanations:
+      - People diagnosed with diabetes START eating healthier (reverse causation)
+      - Wealthy people afford both healthy food AND better healthcare (confounding)
+      - Survivorship bias: People who died from diabetes are not in the survey
+   
+2. TEMPORAL AMBIGUITY
+   Q: BRFSS is a cross-sectional survey (one point in time). Can we determine 
+      which came first: the risk factor or the disease?
+   A: No. We cannot distinguish between:
+      - Risk factors that CAUSE diabetes
+      - Behavioral changes AFTER diabetes diagnosis
+   
+3. SIMPSON'S PARADOX
+   Q: A rule might show positive association overall, but negative within subgroups.
+      Example: "Exercise → Diabetes" might seem positive overall, but negative 
+      within each age group separately.
+   A: Always stratify by confounders (age, sex, income) before drawing conclusions.
+   
+4. SELECTION BIAS (Telephone Survey)
+   Q: Who is more likely to answer a phone survey?
+   A: Older adults, homeowners, less tech-savvy individuals. This means:
+      - Young diabetics might be underrepresented
+      - True diabetes prevalence in 18-30 age group might be higher than observed
+   
+5. SELF-REPORTED DATA RELIABILITY
+   Q: Can people accurately report their BMI, diet, and exercise?
+   A: Studies show self-reported BMI is often underestimated by 2-3 kg/m².
+      This means our "BMI>30" group might actually include BMI>32-33.
+
+RECOMMENDATION FOR PUBLIC HEALTH POLICY:
+- Use "Golden Rules" (high support, moderate lift) for population screening
+- Use "Extreme High-risk" rules for targeted intensive interventions
+- Conduct longitudinal studies to confirm causality before implementing prevention programs
+- Consider socioeconomic confounders when designing interventions

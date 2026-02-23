@@ -1,0 +1,21 @@
+
+1. Common Lifestyle Habits Among Diabetic Patients:
+   ✓ Significantly higher BMI: 31.8 vs 27.7 (+4.1)
+   ✓ Higher smoking rate: 51.5% vs 43.0%
+   ⚠ Counter-intuitive finding: Diabetic patients exercise/eat more fruits & veggies!
+      → Possible reason: Post-diagnosis lifestyle improvements (reverse causation)
+
+2. Highest Risk Lifestyle Combinations (Top 3):
+   Highest: Smoker + No exercise + Fruits + No veggies + No heavy drinking → 29.01%
+   2nd: Non-smoker + No exercise + Fruits + No veggies + No heavy drinking → 26.59%
+   3rd: Smoker + No exercise + No fruits + No veggies + No heavy drinking → 26.06%
+
+3. Lowest Risk Lifestyle Combinations (Top 3):
+   Lowest: Non-smoker + Exercise + Fruits + Veggies + Heavy drinking → 3.57%
+   2nd: Non-smoker + Exercise + No fruits + Veggies + Heavy drinking → 4.67%
+   3rd: Non-smoker + Exercise + No fruits + No veggies + Heavy drinking → 5.34%
+
+4. Risk Differences:
+   Highest risk combination is 8.12x the lowest risk
+   Highest risk is 1.84x baseline rate
+   Lowest risk is 0.23x baseline rate

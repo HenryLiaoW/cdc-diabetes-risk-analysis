@@ -1,0 +1,32 @@
+Lifestyle Combination,Diabetes Rate (%),total_count,diabetic_count
+Smoker + No exercise + Fruits + No veggies + No heavy drinking,29.00763358778626,2751,798
+Non-smoker + No exercise + Fruits + No veggies + No heavy drinking,26.589595375722542,2941,782
+Smoker + No exercise + No fruits + No veggies + No heavy drinking,26.05962933118453,6205,1617
+Smoker + No exercise + Fruits + Veggies + No heavy drinking,25.354411891055932,11639,2951
+Smoker + No exercise + No fruits + Veggies + No heavy drinking,24.816959895093433,9151,2271
+Non-smoker + No exercise + No fruits + No veggies + No heavy drinking,24.211690945970865,5423,1313
+Non-smoker + No exercise + No fruits + Veggies + No heavy drinking,21.944407500997475,7519,1650
+Non-smoker + No exercise + Fruits + Veggies + No heavy drinking,21.494102228047183,12971,2788
+Smoker + Exercise + Fruits + No veggies + No heavy drinking,20.805785123966942,4840,1007
+Smoker + Exercise + No fruits + No veggies + No heavy drinking,20.245813074014045,7404,1499
+Smoker + No exercise + Fruits + No veggies + Heavy drinking,19.1358024691358,162,31
+Smoker + Exercise + No fruits + Veggies + No heavy drinking,17.55895474824729,18828,3306
+Non-smoker + Exercise + Fruits + No veggies + No heavy drinking,15.403248788828726,7018,1081
+Non-smoker + Exercise + No fruits + No veggies + No heavy drinking,15.14917127071823,9050,1371
+Smoker + Exercise + Fruits + Veggies + No heavy drinking,15.059757192120554,42338,6376
+Non-smoker + No exercise + No fruits + No veggies + Heavy drinking,13.986013986013987,143,20
+Non-smoker + Exercise + No fruits + Veggies + No heavy drinking,12.846270928462708,22995,2954
+Smoker + No exercise + No fruits + Veggies + Heavy drinking,12.826333711691259,881,113
+Non-smoker + No exercise + Fruits + Veggies + Heavy drinking,12.35632183908046,348,43
+Smoker + No exercise + No fruits + No veggies + Heavy drinking,11.247443762781186,489,55
+Non-smoker + Exercise + Fruits + Veggies + No heavy drinking,10.494359994733069,68351,7173
+Smoker + No exercise + Fruits + Veggies + Heavy drinking,10.378510378510379,819,85
+Non-smoker + No exercise + No fruits + Veggies + Heavy drinking,9.505703422053232,263,25
+Smoker + Exercise + No fruits + No veggies + Heavy drinking,8.803986710963455,602,53
+Smoker + Exercise + Fruits + No veggies + Heavy drinking,7.6923076923076925,260,20
+Smoker + Exercise + No fruits + Veggies + Heavy drinking,7.614436619718309,2272,173
+Smoker + Exercise + Fruits + Veggies + Heavy drinking,6.451612903225806,3782,244
+Non-smoker + Exercise + Fruits + No veggies + Heavy drinking,5.660377358490567,159,9
+Non-smoker + Exercise + No fruits + No veggies + Heavy drinking,5.341246290801187,337,18
+Non-smoker + Exercise + No fruits + Veggies + Heavy drinking,4.672131147540984,1220,57
+Non-smoker + Exercise + Fruits + Veggies + Heavy drinking,3.571428571428571,2464,88
