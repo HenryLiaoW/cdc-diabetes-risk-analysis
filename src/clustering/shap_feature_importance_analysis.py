@@ -38,7 +38,7 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 FEATURES = [
     'chronic_disease_burden',
-    'metabolic_baseline',
+    'BMI',
     'lifestyle_risk',
     'substance_risk',
     'ses_vulnerability'
@@ -47,7 +47,7 @@ FEATURES = [
 # Display names for visualizations (use "Addiction" instead of "Substance")
 FEATURE_DISPLAY_NAMES = [
     'chronic_disease_burden',
-    'metabolic_baseline',
+    'BMI',
     'lifestyle_risk',
     'addiction_risk',  # Changed from substance_risk for display
     'ses_vulnerability'
@@ -55,7 +55,7 @@ FEATURE_DISPLAY_NAMES = [
 
 FEATURE_NAMES_CN = {
     'chronic_disease_burden': '慢性病负担',
-    'metabolic_baseline': 'BMI代谢基线',
+    'BMI': 'BMI代谢基线',
     'lifestyle_risk': '生活方式风险',
     'substance_risk': '物质使用风险',
     'ses_vulnerability': '社会经济脆弱性'
@@ -607,7 +607,7 @@ with open(report_path, 'w', encoding='utf-8') as f:
             f.write("         - Free/subsidized screening\n")
             f.write("         - Community health workers\n")
             f.write("         - Transportation assistance\n")
-        elif feature == 'metabolic_baseline':
+        elif feature == 'BMI':
             f.write("       • Weight management programs (C4: Metabolic Extremes)\n")
             f.write("         - Bariatric evaluation for BMI >40\n")
             f.write("         - Dietary counseling\n")

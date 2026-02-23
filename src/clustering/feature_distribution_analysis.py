@@ -33,14 +33,14 @@ df = pd.read_csv('/Users/henry/AAI/FAIDM/CDC_DCDC_Diabetes_Project/data/processe
 # Create 6 composite features
 df['chronic_disease_burden'] = (df['HighBP'] + df['HighChol'] + df['Stroke'] + 
                                   df['HeartDiseaseorAttack'] + df['DiffWalk'])
-df['metabolic_baseline'] = df['BMI']
+# BMI already exists in dataframe
 df['healthy_lifestyle_score'] = df['Veggies'] + df['Fruits'] + df['PhysActivity']
 df['substance_risk'] = df['Smoker'] + df['HvyAlcoholConsump']
 df['ses_vulnerability'] = (10 - df['Income']) + (7 - df['Education'])
 df['medical_engagement'] = df['CholCheck']
 
 feature_names = [
-    'metabolic_baseline',
+    'BMI',
     'chronic_disease_burden',
     'healthy_lifestyle_score',
     'substance_risk',
@@ -49,7 +49,7 @@ feature_names = [
 ]
 
 feature_labels = [
-    'Metabolic Baseline (BMI)',
+    'BMI',
     'Chronic Disease Burden (0-5)',
     'Healthy Lifestyle Score (0-3)',
     'Substance Risk (0-2)',

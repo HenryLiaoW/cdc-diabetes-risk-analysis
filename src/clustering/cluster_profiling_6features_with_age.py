@@ -35,13 +35,13 @@ df = pd.read_csv('/Users/henry/AAI/FAIDM/CDC_DCDC_Diabetes_Project/data/processe
 # Recreate composite features (same as kmeans_6features_with_age.py)
 df['chronic_disease_burden'] = (df['HighBP'] + df['HighChol'] + df['Stroke'] + 
                                   df['HeartDiseaseorAttack'] + df['DiffWalk'])
-df['metabolic_baseline'] = df['BMI']
+# BMI already exists as a column
 df['healthy_lifestyle_score'] = df['Veggies'] + df['Fruits'] + df['PhysActivity']
 df['substance_risk'] = df['Smoker'] + df['HvyAlcoholConsump']
 df['ses_vulnerability'] = (10 - df['Income']) + (7 - df['Education'])
 df['age'] = df['Age']  # Include Age as 6th feature
 
-feature_names = ['metabolic_baseline', 'chronic_disease_burden', 
+feature_names = ['BMI', 'chronic_disease_burden', 
                  'healthy_lifestyle_score', 'substance_risk', 
                  'ses_vulnerability', 'age']
 
@@ -54,7 +54,7 @@ print(f"✓ Dataset shape: {X_cluster.shape}")
 print("\n[Step 2] Applying data-driven mixed scaling and K-Means clustering (K=6)...")
 
 # Data-driven preprocessing (including Age)
-robust_features = ['metabolic_baseline', 'healthy_lifestyle_score']
+robust_features = ['BMI', 'healthy_lifestyle_score']
 standard_features = ['chronic_disease_burden', 'ses_vulnerability', 'age']
 minmax_features = ['substance_risk']
 
@@ -154,7 +154,7 @@ for idx, row in profile_df.iterrows():
     lifestyle = row['healthy_lifestyle_score']
     substance = row['substance_risk']
     ses = row['ses_vulnerability']
-    bmi = row['metabolic_baseline']
+    bmi = row['BMI']
     age = row['age']  # Age factor
     diabetes_rate = row['Diabetes_Rate']
     
@@ -354,7 +354,7 @@ with open(intervention_output, 'w', encoding='utf-8') as f:
         f.write("RISK PROFILE:\n")
         f.write(f"  • Age: {profile_df.loc[cluster_id, 'age']:.1f} (ordinal, 1-13 scale)\n")
         f.write(f"  • Chronic Disease Burden: {profile_df.loc[cluster_id, 'chronic_disease_burden']:.2f}/5.0\n")
-        f.write(f"  • Metabolic Baseline (BMI): {profile_df.loc[cluster_id, 'metabolic_baseline']:.1f}\n")
+        f.write(f"  • BMI: {profile_df.loc[cluster_id, 'BMI']:.1f}\n")
         f.write(f"  • Healthy Lifestyle Score: {profile_df.loc[cluster_id, 'healthy_lifestyle_score']:.2f}/3.0\n")
         f.write(f"  • Substance Risk: {profile_df.loc[cluster_id, 'substance_risk']:.2f}/2.0\n")
         f.write(f"  • SES Vulnerability: {profile_df.loc[cluster_id, 'ses_vulnerability']:.1f}/17.0\n\n")

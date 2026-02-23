@@ -51,7 +51,7 @@ print(f"  • Clusters (K=6): {df['cluster'].value_counts().sort_index().to_dict
 print("\n[Step 2] Verifying composite features...")
 
 # Verify composite features exist (they should already be in the loaded data)
-feature_names = ['metabolic_baseline', 'chronic_disease_burden', 
+feature_names = ['BMI', 'chronic_disease_burden', 
                  'lifestyle_risk', 'substance_risk', 
                  'ses_vulnerability']
 
@@ -60,7 +60,7 @@ if not all(col in df.columns for col in feature_names):
     print("⚠️ Composite features missing, recreating...")
     df['chronic_disease_burden'] = (df['HighBP'] + df['HighChol'] + df['Stroke'] + 
                                       df['HeartDiseaseorAttack'] + df['DiffWalk'])
-    df['metabolic_baseline'] = df['BMI']
+    # BMI already exists as a column, no need to create
     df['lifestyle_risk'] = 3 - (df['Veggies'] + df['Fruits'] + df['PhysActivity'])
     df['substance_risk'] = df['Smoker'] + df['HvyAlcoholConsump']
     df['ses_vulnerability'] = (10 - df['Income']) + (7 - df['Education'])
@@ -351,7 +351,7 @@ with open(intervention_output, 'w', encoding='utf-8') as f:
         f.write(f"Population Size: {profile_df.loc[cluster_id, 'Size']:,} ({profile_df.loc[cluster_id, 'Percent']})\n\n")
         f.write("RISK PROFILE:\n")
         f.write(f"  • Chronic Disease Burden: {profile_df.loc[cluster_id, 'chronic_disease_burden']:.2f}/5.0\n")
-        f.write(f"  • Metabolic Baseline (BMI): {profile_df.loc[cluster_id, 'metabolic_baseline']:.1f}\n")
+        f.write(f"  • BMI: {profile_df.loc[cluster_id, 'BMI']:.1f}\n")
         f.write(f"  • Lifestyle Risk: {profile_df.loc[cluster_id, 'lifestyle_risk']:.2f}/3.0\n")
         f.write(f"  • Addiction Risk: {profile_df.loc[cluster_id, 'substance_risk']:.2f}/2.0\n")
         f.write(f"  • SES Vulnerability: {profile_df.loc[cluster_id, 'ses_vulnerability']:.1f}/17.0\n\n")

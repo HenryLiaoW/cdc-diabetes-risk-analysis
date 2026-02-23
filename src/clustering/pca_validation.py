@@ -47,7 +47,7 @@ INPUT_FILE = DATA_DIR / 'kmeans_k6_complete_LATEST.csv'
 # 5 Composite Features (5 Pillars)
 FEATURES = [
     'chronic_disease_burden',
-    'metabolic_baseline',
+    'BMI',
     'lifestyle_risk',
     'substance_risk',
     'ses_vulnerability'

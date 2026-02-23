@@ -37,14 +37,14 @@ df = pd.read_csv('/Users/henry/AAI/FAIDM/CDC_DCDC_Diabetes_Project/data/processe
 # Create 6 composite features (same as kmeans_6features_with_age.py)
 df['chronic_disease_burden'] = (df['HighBP'] + df['HighChol'] + df['Stroke'] + 
                                   df['HeartDiseaseorAttack'] + df['DiffWalk'])
-df['metabolic_baseline'] = df['BMI']
+# BMI already exists in dataframe
 df['lifestyle_risk'] = 3 - (df['Veggies'] + df['Fruits'] + df['PhysActivity'])
 df['substance_risk'] = df['Smoker'] + df['HvyAlcoholConsump']
 df['ses_vulnerability'] = (10 - df['Income']) + (7 - df['Education'])
 df['age'] = df['Age']  # Include Age as 6th feature
 
 feature_names = [
-    'metabolic_baseline',
+    'BMI',
     'chronic_disease_burden',
     'lifestyle_risk',
     'substance_risk',
@@ -53,7 +53,7 @@ feature_names = [
 ]
 
 feature_labels = [
-    'Metabolic Baseline (BMI)',
+    'BMI',
     'Chronic Disease Burden',
     'Lifestyle Risk',
     'Substance Risk',
@@ -392,7 +392,7 @@ with open(report_path, 'w', encoding='utf-8') as f:
     age_corr_with_bmi = corr_matrix.loc[feature_names[5], feature_names[0]]
     f.write(f"Key Age Correlations:\n")
     f.write(f"  • Age ↔ Chronic Disease Burden: r={age_corr_with_chronic:.3f}\n")
-    f.write(f"  • Age ↔ Metabolic Baseline (BMI): r={age_corr_with_bmi:.3f}\n\n")
+    f.write(f"  • Age ↔ BMI: r={age_corr_with_bmi:.3f}\n\n")
     
     if abs(age_corr_with_chronic) > 0.5 or abs(age_corr_with_bmi) > 0.5:
         f.write("⚠️  CAUTION: Age shows moderate correlation with other features.\n")

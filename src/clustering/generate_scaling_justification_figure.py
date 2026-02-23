@@ -27,7 +27,7 @@ df = pd.read_csv('/Users/henry/AAI/FAIDM/CDC_DCDC_Diabetes_Project/data/processe
 # Create 5 composite features
 df['chronic_disease_burden'] = (df['HighBP'] + df['HighChol'] + df['Stroke'] + 
                                   df['HeartDiseaseorAttack'] + df['DiffWalk'])
-df['metabolic_baseline'] = df['BMI']
+# BMI already exists in dataframe
 df['lifestyle_risk'] = 3 - (df['Veggies'] + df['Fruits'] + df['PhysActivity'])
 df['substance_risk'] = df['Smoker'] + df['HvyAlcoholConsump']
 df['ses_vulnerability'] = (10 - df['Income']) + (7 - df['Education'])
@@ -35,8 +35,8 @@ df['ses_vulnerability'] = (10 - df['Income']) + (7 - df['Education'])
 # Feature configurations
 features = [
     {
-        'name': 'metabolic_baseline',
-        'label': 'Metabolic Baseline (BMI)',
+        'name': 'BMI',
+        'label': 'BMI',
         'scaler': 'RobustScaler',
         'reason': 'Skew=2.06, Outliers=2.5%'
     },
@@ -154,7 +154,7 @@ print("-" * 80)
 print("Figure X. Feature distribution characteristics justifying individualized")
 print("scaling strategy. (A-E) Distribution profiles for five composite features")
 print("with applied scaler annotated. RobustScaler applied to skewed features with")
-print("outliers (Metabolic Baseline, Lifestyle Risk), MinMaxScaler for sparse")
+print("outliers (BMI, Lifestyle Risk), MinMaxScaler for sparse")
 print("binary signals (Substance Risk), and StandardScaler for symmetric multimodal")
 print("distributions (Chronic Disease, SES Vulnerability). All features coded in")
 print("unified risk direction (higher values = greater risk) for intuitive radar")

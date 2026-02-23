@@ -24,7 +24,7 @@ df['chronic_disease_burden'] = (df['HighBP'] + df['HighChol'] + df['Stroke'] +
                                   df['HeartDiseaseorAttack'] + df['DiffWalk'])
 
 # 2. 代谢基准：BMI（保持原始连续值，最核心的糖尿病预测因子）
-df['metabolic_baseline'] = df['BMI']
+# BMI: Body Mass Index - continuous physiological risk factor
 
 # 3. 生活方式风险 (0-3)：不健康行为聚合（反向编码统一风险方向）
 df['lifestyle_risk'] = 3 - (df['Veggies'] + df['Fruits'] + df['PhysActivity'])
@@ -38,7 +38,7 @@ df['ses_vulnerability'] = (10 - df['Income']) + (7 - df['Education'])
 
 print(f"✓ Created 5 composite features (unified risk direction):")
 print(f"  1. chronic_disease_burden (0-5): Sum of 5 chronic conditions")
-print(f"  2. metabolic_baseline: BMI (continuous)")
+print(f"  2. BMI: Body Mass Index (continuous)")
 print(f"  3. lifestyle_risk (0-3): 3 - (Veggies + Fruits + PhysActivity)")
 print(f"  4. substance_risk (0-2): Smoker + HvyAlcoholConsump")
 print(f"  5. ses_vulnerability (0-17): (10-Income) + (7-Education)")
@@ -48,7 +48,7 @@ print(f"  5. ses_vulnerability (0-17): (10-Income) + (7-Education)")
 # medical_engagement已去除（极端偏态且信息冗余）
 
 # 按缩放方法分组（基于偏度、离群值、稀疏性分析）
-robust_features = ['metabolic_baseline', 'lifestyle_risk']
+robust_features = ['BMI', 'lifestyle_risk']
 standard_features = ['chronic_disease_burden', 'ses_vulnerability']
 minmax_features = ['substance_risk']
 
@@ -98,7 +98,7 @@ with open(log_file, 'a', encoding='utf-8') as f:
     f.write("   Formula: HighBP + HighChol + Stroke + HeartDiseaseorAttack + DiffWalk\n")
     f.write("   Purpose: Multi-morbidity severity grading\n")
     f.write("   Academic Value: Identify high-risk populations with multiple conditions\n\n")
-    f.write("2. metabolic_baseline (continuous)\n")
+    f.write("2. BMI (continuous)\n")
     f.write("   Formula: BMI (original value)\n")
     f.write("   Purpose: Core physiological diabetes predictor\n")
     f.write("   Academic Value: Most significant continuous risk factor\n\n")
@@ -144,7 +144,7 @@ preprocessor = ColumnTransformer(
 
 X_scaled = preprocessor.fit_transform(X_cluster)
 print("✓ Data-driven mixed scaling applied (5 features):")
-print("  • RobustScaler: metabolic_baseline, lifestyle_risk")
+print("  • RobustScaler: BMI, lifestyle_risk")
 print("  • StandardScaler: chronic_disease_burden, ses_vulnerability")
 print("  • MinMaxScaler: substance_risk (51.3% sparse)")
 
@@ -152,7 +152,7 @@ print("  • MinMaxScaler: substance_risk (51.3% sparse)")
 with open(log_file, 'a', encoding='utf-8') as f:
     f.write("[Step 2] Data-Driven Feature Scaling (5 features)\n")
     f.write("Mixed scaling strategy (based on distribution analysis):\n")
-    f.write("  • RobustScaler: metabolic_baseline, lifestyle_risk\n")
+    f.write("  • RobustScaler: BMI, lifestyle_risk\n")
     f.write("    → Reason: Long-tail/Skewed distributions (|skewness| > 0.7 or outliers > 4%)\n")
     f.write("  • StandardScaler: chronic_disease_burden, ses_vulnerability\n")
     f.write("    → Reason: Relatively symmetric distributions (|skewness| < 0.75)\n")

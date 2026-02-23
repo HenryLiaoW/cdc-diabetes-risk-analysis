@@ -37,13 +37,13 @@ df = pd.read_csv('/Users/henry/AAI/FAIDM/CDC_DCDC_Diabetes_Project/data/processe
 # Create 5 composite features (same as kmeans.py)
 df['chronic_disease_burden'] = (df['HighBP'] + df['HighChol'] + df['Stroke'] + 
                                   df['HeartDiseaseorAttack'] + df['DiffWalk'])
-df['metabolic_baseline'] = df['BMI']
+# BMI already exists in dataframe
 df['lifestyle_risk'] = 3 - (df['Veggies'] + df['Fruits'] + df['PhysActivity'])
 df['substance_risk'] = df['Smoker'] + df['HvyAlcoholConsump']
 df['ses_vulnerability'] = (10 - df['Income']) + (7 - df['Education'])
 
 feature_list = [
-    'metabolic_baseline',
+    'BMI',
     'chronic_disease_burden',
     'lifestyle_risk',
     'substance_risk',
@@ -51,7 +51,7 @@ feature_list = [
 ]
 
 feature_labels = [
-    'Metabolic Baseline (BMI)',
+    'BMI',
     'Chronic Disease Burden',
     'Lifestyle Risk',
     'Substance Risk',

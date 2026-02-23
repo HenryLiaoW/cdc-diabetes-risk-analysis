@@ -37,7 +37,7 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 FEATURES = [
     'chronic_disease_burden',
-    'metabolic_baseline',
+    'BMI',
     'lifestyle_risk',
     'substance_risk',
     'ses_vulnerability'
@@ -46,7 +46,7 @@ FEATURES = [
 # Display names for visualizations
 FEATURE_DISPLAY_NAMES = [
     'chronic_disease_burden',
-    'metabolic_baseline',
+    'BMI',
     'lifestyle_risk',
     'addiction_risk',  # Display as "addiction_risk" instead of "substance_risk"
     'ses_vulnerability'

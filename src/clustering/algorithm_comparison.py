@@ -46,7 +46,7 @@ INPUT_FILE = DATA_DIR / 'kmeans_k6_complete_LATEST.csv'
 
 FEATURES = [
     'chronic_disease_burden',
-    'metabolic_baseline',
+    'BMI',
     'lifestyle_risk',
     'substance_risk',
     'ses_vulnerability'

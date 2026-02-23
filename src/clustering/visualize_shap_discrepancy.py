@@ -11,7 +11,7 @@ if not data_path.exists():
     print("Warning: CSV not found. Please ensure feature_importance_results.csv is in the directory.")
     # 这里为了演示，创建一个模拟数据结构（实际运行时请注释掉）
     df = pd.DataFrame({
-        'Feature': ['chronic_disease_burden', 'ses_vulnerability', 'lifestyle_risk', 'metabolic_baseline', 'substance_risk'],
+        'Feature': ['chronic_disease_burden', 'ses_vulnerability', 'lifestyle_risk', 'BMI', 'substance_risk'],
         'RF_Gini_Importance': [0.245, 0.296, 0.228, 0.228, 0.001],
         'RF_SHAP_Importance': [0.121, 0.119, 0.096, 0.066, 0.001],
         'XGB_Gain_Importance': [0.321, 0.296, 0.282, 0.097, 0.002],
@@ -29,7 +29,7 @@ feature_labels = {
     'chronic_disease_burden': 'Chronic Disease Burden',
     'ses_vulnerability': 'SES Vulnerability',
     'lifestyle_risk': 'Lifestyle Risk',
-    'metabolic_baseline': 'Metabolic Baseline (BMI)',
+    'BMI': 'BMI',
     'substance_risk': 'Substance Risk'
 }
 df['Label'] = df['Feature'].map(feature_labels)
