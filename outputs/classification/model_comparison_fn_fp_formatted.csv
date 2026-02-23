@@ -1,0 +1,4 @@
+Model,FN,FN_Rate,FP,FP_Rate
+Logistic Regression,"2,335",29.21%,"11,372",26.61%
+Random Forest,"1,983",24.80%,"12,916",30.22%
+XGBoost,"1,931",24.15%,"13,188",30.86%

@@ -1,0 +1,6 @@
+Feature,Mean_Abs_SHAP
+Chronic_Disease_Burden,0.83843094
+BMI,0.4518422
+SES_Vulnerability,0.233022
+Lifestyle_Risk,0.075124644
+Substance_Risk,0.05720174

@@ -1,0 +1,2 @@
+colsample_bytree,learning_rate,max_depth,n_estimators,subsample
+1.0,0.03,3,200,0.8

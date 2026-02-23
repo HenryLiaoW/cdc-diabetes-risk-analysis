@@ -59,7 +59,18 @@ outputs/clustering/*
 !outputs/clustering/profiling/
 outputs/clustering/profiling/*
 !outputs/clustering/profiling/final_20260221_222939/
-outputs/classification/
+
+# Classification outputs - Keep key results for report
+outputs/classification/*_predictions.csv
+outputs/classification/X_*.csv
+outputs/classification/features_engineered.csv
+!outputs/classification/*.png
+!outputs/classification/*_metrics.csv
+!outputs/classification/*_comparison*.csv
+!outputs/classification/*_importance*.csv
+!outputs/classification/*_params*.csv
+!outputs/classification/y_*.csv
+
 outputs/exploration/
 outputs/report/
 
