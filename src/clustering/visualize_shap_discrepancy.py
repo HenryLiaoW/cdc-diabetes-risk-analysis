@@ -4,12 +4,12 @@ import numpy as np
 import seaborn as sns
 from pathlib import Path
 
-# 使用绝对路径指向SHAP分析结果目录
+# using绝对路径指向SHAP分析结果目录
 data_path = Path('/Users/henry/AAI/FAIDM/CDC_DCDC_Diabetes_Project/outputs/clustering/profiling/final_20260221_222939/shap_analysis/feature_importance_results.csv')
 # 如果文件不存在，请确保路径正确
 if not data_path.exists():
     print("Warning: CSV not found. Please ensure feature_importance_results.csv is in the directory.")
-    # 这里为了演示，创建一个模拟数据结构（实际运行时请注释掉）
+    # 这里for了演示，创建一个模拟数据结构（实际运行时请注释掉）
     df = pd.DataFrame({
         'Feature': ['chronic_disease_burden', 'ses_vulnerability', 'lifestyle_risk', 'BMI', 'substance_risk'],
         'RF_Gini_Importance': [0.245, 0.296, 0.228, 0.228, 0.001],
@@ -42,7 +42,7 @@ feature_order = df_sorted['Label'].tolist()
 # 创建画布 (只保留1行2列的条形图对比)
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
 
-# RF SHAP - 使用统一顺序
+# RF SHAP - using统一顺序
 df_plot_rf = df.set_index('Label').loc[feature_order].reset_index()
 bars1 = ax1.barh(df_plot_rf['Label'], df_plot_rf['RF_SHAP_Importance'], color='#4682B4', alpha=0.8, edgecolor='black', linewidth=1.5)
 ax1.set_title('Random Forest: SHAP Global Importance', fontweight='bold', fontsize=13)
@@ -55,7 +55,7 @@ for i, (bar, label) in enumerate(zip(bars1, df_plot_rf['Label'])):
     ax1.text(bar.get_width() * 0.05, bar.get_y() + bar.get_height()/2, 
              f'#{int(rank)}', va='center', fontsize=11, fontweight='bold', color='white')
 
-# XGB SHAP - 使用统一顺序
+# XGB SHAP - using统一顺序
 df_plot_xgb = df.set_index('Label').loc[feature_order].reset_index()
 bars2 = ax2.barh(df_plot_xgb['Label'], df_plot_xgb['XGB_SHAP_Importance'], color='#8B4513', alpha=0.8, edgecolor='black', linewidth=1.5)
 ax2.set_title('XGBoost: SHAP Global Importance', fontweight='bold', fontsize=13)

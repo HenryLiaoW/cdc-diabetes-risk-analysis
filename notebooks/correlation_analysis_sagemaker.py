@@ -2,10 +2,10 @@
 CDC Diabetes Dataset - Correlation Analysis for SageMaker/Jupyter
 相关性分析 - SageMaker/Jupyter Notebook 版本
 
-使用说明:
+using说明:
 1. 上传 CDC Diabetes Dataset.csv 到 SageMaker Studio 的当前目录
 2. 将这个文件的代码复制到 Notebook 单元格中运行
-3. 或者保存为 .py 文件后在 Notebook 中运行: %run correlation_analysis_sagemaker.py
+3. 或者保存for .py 文件后在 Notebook 中运行: %run correlation_analysis_sagemaker.py
 """
 
 # ============================================================================
@@ -35,7 +35,7 @@ for f in os.listdir('.')[:20]:  # 只显示前20个文件
 # ============================================================================
 # 取消注释下面的代码来上传文件
 # from IPython.display import display, HTML
-# print("\n请使用文件浏览器上传 'CDC Diabetes Dataset.csv' 到当前目录")
+# print("\n请using文件浏览器上传 'CDC Diabetes Dataset.csv' 到当前目录")
 # print("或者运行下面的代码:")
 # print("!aws s3 cp s3://your-bucket/CDC_Diabetes_Dataset.csv .")
 
@@ -102,7 +102,7 @@ for i, (feat, corr_val) in enumerate(target_corr.items(), 1):
         print(f"  {i:2d}. {feat:25s}: r = {corr_val:7.4f}  [{strength:8s}, {direction}]")
 
 # ============================================================================
-# 单元格 6: 保存结果到 DataFrame
+# 单元格 6: Save results to DataFrame
 # ============================================================================
 print("\n" + "=" * 80)
 print("4. 保存相关性数据")
@@ -127,10 +127,10 @@ print("\n前10个特征:")
 print(correlation_df.head(10).to_string(index=False))
 
 # ============================================================================
-# 单元格 7: 可视化 - Top 10 相关特征
+# 单元格 7: Visualization - Top 10 相关特征
 # ============================================================================
 print("\n" + "=" * 80)
-print("5. 可视化分析")
+print("5. Visualization分析")
 print("=" * 80)
 
 # Top 10 features (按绝对值)
@@ -217,7 +217,7 @@ print("✓ 已保存: correlation_heatmap_top15.png")
 plt.show()
 
 # ============================================================================
-# 单元格 9: 总结报告
+# 单元格 9: 总结report
 # ============================================================================
 print("\n" + "=" * 80)
 print("6. 分析总结")
@@ -275,7 +275,7 @@ summary += f"""
 
 print(summary)
 
-# 保存报告
+# 保存report
 with open('correlation_analysis_report.txt', 'w') as f:
     f.write(summary)
 print("✓ 已保存: correlation_analysis_report.txt")

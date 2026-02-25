@@ -12,28 +12,28 @@ print("="*80)
 print("K-MEANS CLUSTERING ANALYSIS")
 print("="*80)
 
-# 1. 准备聚类特征
+# 1. Prepare clustering features
 print("\n[Step 1] Loading data and preparing features...")
 df = pd.read_csv('/Users/henry/AAI/FAIDM/CDC_DCDC_Diabetes_Project/data/processed/CDC_Diabetes_Cleaned.csv')
 
-# 特征工程：基于学术最佳实践的维度聚合
+# Feature engineering: Dimension aggregation based on academic best practices
 print("\n[Step 1.1] Feature Engineering - Creating 6 composite indicators...")
 
-# 1. 慢性病负担 (0-5)：多重慢病严重程度
+# 1. Chronic disease burden (0-5): Multi-morbidity severity
 df['chronic_disease_burden'] = (df['HighBP'] + df['HighChol'] + df['Stroke'] + 
                                   df['HeartDiseaseorAttack'] + df['DiffWalk'])
 
-# 2. 代谢基准：BMI（保持原始连续值，最核心的糖尿病预测因子）
+# 2. Metabolic baseline: BMI (continuous value, core diabetes predictor)
 # BMI: Body Mass Index - continuous physiological risk factor
 
-# 3. 生活方式风险 (0-3)：不健康行为聚合（反向编码统一风险方向）
+# 3. Lifestyle risk (0-3): Unhealthy behavior aggregation (reverse-coded for unified risk direction)
 df['lifestyle_risk'] = 3 - (df['Veggies'] + df['Fruits'] + df['PhysActivity'])
 
-# 4. 物质使用风险 (0-2)：成瘾行为指标
+# 4. Substance use risk (0-2): Addictive behavior indicator
 df['substance_risk'] = df['Smoker'] + df['HvyAlcoholConsump']
 
-# 5. 社会经济脆弱性 (0-17)：精准定位弱势群体
-# 收入越低、教育越低 → 脆弱性越高
+# 5. Socioeconomic vulnerability (0-17): Precise identification of vulnerable groups
+# Lower income, lower education → Higher vulnerability
 df['ses_vulnerability'] = (10 - df['Income']) + (7 - df['Education'])
 
 print(f"✓ Created 5 composite features (unified risk direction):")
@@ -43,11 +43,11 @@ print(f"  3. lifestyle_risk (0-3): 3 - (Veggies + Fruits + PhysActivity)")
 print(f"  4. substance_risk (0-2): Smoker + HvyAlcoholConsump")
 print(f"  5. ses_vulnerability (0-17): (10-Income) + (7-Education)")
 
-# 定义特征组（基于分布分析的数据驱动缩放策略）
-# 策略来源：outputs/clustering/distribution_analysis报告
-# medical_engagement已去除（极端偏态且信息冗余）
+# Define feature groups (data-driven scaling strategy based on distribution analysis)
+# Strategy source: outputs/clustering/distribution_analysis report
+# medical_engagement removed (extreme skewness and information redundancy)
 
-# 按缩放方法分组（基于偏度、离群值、稀疏性分析）
+# Group by scaling method (based on skewness, outliers, sparsity analysis)
 robust_features = ['BMI', 'lifestyle_risk']
 standard_features = ['chronic_disease_burden', 'ses_vulnerability']
 minmax_features = ['substance_risk']
@@ -56,16 +56,16 @@ all_features = robust_features + standard_features + minmax_features
 n_features = len(all_features)
 X_cluster = df[all_features]
 
-# 创建日志目录和文件名（使用特征数作为前缀）
+# Create log directory and file name (using feature count as prefix)
 log_dir = Path('/Users/henry/AAI/FAIDM/CDC_DCDC_Diabetes_Project/outputs/clustering/log')
 log_dir.mkdir(parents=True, exist_ok=True)
 
-# 创建时间戳用于日志文件名
+# Create timestamp for log file name
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 log_file = log_dir / f"{n_features}features_composite_kmeans_run_{timestamp}.txt"
 results_csv = log_dir / f"{n_features}features_composite_kmeans_results_{timestamp}.csv"
 
-# 创建日志文件并写入头部信息
+# Create log file and write header
 with open(log_file, 'w', encoding='utf-8') as f:
     f.write("="*80 + "\n")
     f.write("K-MEANS CLUSTERING ANALYSIS LOG\n")
@@ -84,7 +84,7 @@ print(f"    → Symmetric: ChronicDisease(skew=0.74), SES(skew=0.69)")
 print(f"  • MinMaxScaler (1 feature): {minmax_features}")
 print(f"    → Sparse: SubstanceRisk(51.3% zeros)")
 
-# 记录到日志
+# Log to file
 with open(log_file, 'a', encoding='utf-8') as f:
     f.write("[Step 1] Feature Engineering - Composite Indicators\n")
     f.write("="*60 + "\n")
@@ -131,7 +131,7 @@ with open(log_file, 'a', encoding='utf-8') as f:
     f.write(f"  • MinMaxScaler: {minmax_features}\n")
     f.write("    Reason: Sparse/Binary-like distribution (51.3% zeros)\n\n")
 
-# 2. 数据驱动的混合缩放：基于分布分析结果
+# 2. Data-driven mixed scaling: Based on distribution analysis results
 print("\n[Step 2] Applying data-driven mixed scaling strategy...")
 preprocessor = ColumnTransformer(
     transformers=[
@@ -148,7 +148,7 @@ print("  • RobustScaler: BMI, lifestyle_risk")
 print("  • StandardScaler: chronic_disease_burden, ses_vulnerability")
 print("  • MinMaxScaler: substance_risk (51.3% sparse)")
 
-# 记录到日志
+# Log to file
 with open(log_file, 'a', encoding='utf-8') as f:
     f.write("[Step 2] Data-Driven Feature Scaling (5 features)\n")
     f.write("Mixed scaling strategy (based on distribution analysis):\n")
@@ -163,16 +163,16 @@ with open(log_file, 'a', encoding='utf-8') as f:
     f.write("\nNote: Scaling strategy determined by distribution analysis report\n")
     f.write("      (see outputs/clustering/distribution_analysis/)\n\n")
 
-# 3. 寻找最优 K (手肘法 + 轮廓系数)
+# 3. Find optimal K (elbow method + silhouette coefficient)
 print("\n[Step 3] Evaluating different K values (K=2 to 7)...")
 print("⚠️  Note: Using 50,000 sample for Silhouette Score (faster computation)")
 
-# 为 Silhouette Score 创建样本（避免 O(n²) 对大数据集太慢）
+# Create sample for Silhouette Score (avoid O(n²) being too slow for large datasets)
 sample_size = min(50000, len(X_scaled))
 sample_indices = np.random.choice(len(X_scaled), sample_size, replace=False)
 X_sample = X_scaled[sample_indices]
 
-# 记录到日志
+# Log to file
 with open(log_file, 'a', encoding='utf-8') as f:
     f.write("[Step 3] K-Means Evaluation\n")
     f.write(f"K range: 2 to 7\n")
@@ -182,9 +182,9 @@ with open(log_file, 'a', encoding='utf-8') as f:
 
 inertia = []
 silhouette_scores = []
-K_range = range(2, 8)  # K=2到7，对大多数应用足够
+K_range = range(2, 8)  # K=2 to 7, sufficient for most applications
 
-# 用于保存详细结果的列表
+# List for saving detailed results
 detailed_results = []
 
 for k in K_range:
@@ -193,18 +193,18 @@ for k in K_range:
     labels = kmeans.fit_predict(X_scaled)
     inertia.append(kmeans.inertia_)
     
-    # 计算轮廓系数 (使用样本数据，范围 -1 到 1，越接近 1 越好)
+    # Calculate silhouette coefficient (using sample data, range -1 to 1, closer to 1 is better)
     labels_sample = kmeans.predict(X_sample)
     sil_score = silhouette_score(X_sample, labels_sample)
     silhouette_scores.append(sil_score)
     
-    # 计算每个簇的大小
+    # Calculate size of each cluster
     unique, counts = np.unique(labels, return_counts=True)
     cluster_sizes = dict(zip(unique, counts))
     
     print(f"Inertia={kmeans.inertia_:.0f}, Silhouette={sil_score:.4f}")
     
-    # 记录到日志文件
+    # Record to log file
     with open(log_file, 'a', encoding='utf-8') as f:
         f.write(f"K = {k}\n")
         f.write(f"  Inertia: {kmeans.inertia_:.2f}\n")
@@ -213,7 +213,7 @@ for k in K_range:
         f.write(f"  Cluster Centers shape: {kmeans.cluster_centers_.shape}\n")
         f.write("\n")
     
-    # 保存详细结果用于CSV
+    # Save detailed results for CSV
     detailed_results.append({
         'K': k,
         'Inertia': kmeans.inertia_,
@@ -224,16 +224,16 @@ for k in K_range:
         'Sample_Size': sample_size
     })
 
-# 找到最优 K (silhouette score 最高)
+# Find optimal K (highest silhouette score)
 best_k = K_range[np.argmax(silhouette_scores)]
 best_silhouette = max(silhouette_scores)
 print(f"\n✓ Best K based on Silhouette Score: {best_k} (score={best_silhouette:.4f})")
 
-# 保存结果到CSV
+# Save results to CSV
 results_df = pd.DataFrame(detailed_results)
 results_df.to_csv(results_csv, index=False)
 
-# 写入总结到日志
+# Write summary to log
 with open(log_file, 'a', encoding='utf-8') as f:
     f.write("="*60 + "\n")
     f.write("RESULTS SUMMARY\n")
@@ -308,10 +308,10 @@ print(f"  Silhouette Score: {silhouette_k6:.4f}")
 # ============================================================================
 print(f"\n[Step 5] Generating evaluation plots...")
 
-# 可视化：手肘图 + 轮廓系数图
+# Visualization: Elbow plot + Silhouette coefficient plot
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 5))
 
-# 左图：手肘图 (Elbow Method)
+# Left plot: Elbow Method
 ax1.plot(K_range, inertia, 'bo-', markersize=8, linewidth=2, label='Inertia')
 ax1.set_xlabel('Number of Clusters (K)', fontsize=11, fontweight='bold')
 ax1.set_ylabel('Inertia (Within-cluster Sum of Squares)', fontsize=11, fontweight='bold')
@@ -319,7 +319,7 @@ ax1.set_title('Elbow Method for Optimal K', fontsize=13, fontweight='bold', pad=
 ax1.grid(True, alpha=0.3)
 ax1.legend()
 
-# 右图：轮廓系数图 (Silhouette Score)
+# Right plot: Silhouette coefficient plot (Silhouette Score)
 ax2.plot(K_range, silhouette_scores, 'ro-', markersize=8, linewidth=2, label='Silhouette Score')
 ax2.axhline(y=best_silhouette, color='g', linestyle='--', alpha=0.7, label=f'Best Score ({best_silhouette:.4f})')
 ax2.axvline(x=best_k, color='g', linestyle='--', alpha=0.7, label=f'Best K={best_k}')
@@ -332,7 +332,7 @@ ax2.set_ylim([0, 1])
 ax2.grid(True, alpha=0.3)
 ax2.legend(loc='lower right')
 
-# 添加解释文本
+# Add explanatory text
 ax2.text(0.05, 0.95, 'Interpretation:\n• Score > 0.5: Good separation\n• Score > 0.7: Strong separation\n• Score < 0.3: Weak separation',
          transform=ax2.transAxes, fontsize=9, verticalalignment='top',
          bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.3))
@@ -349,7 +349,7 @@ print("\n" + "="*80)
 print("ANALYSIS COMPLETE")
 print("="*80)
 
-# 写入完成日志
+# Write completion log
 with open(log_file, 'a', encoding='utf-8') as f:
     f.write(f"\nAnalysis completed at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
     f.write("="*80 + "\n")

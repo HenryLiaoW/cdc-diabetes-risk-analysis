@@ -30,7 +30,7 @@ df = pd.read_csv(DATA_DIR / 'raw' / 'CDC Diabetes Dataset.csv')
 print(f"\n数据集: {len(df):,} 样本, {df.shape[1]} 特征")
 
 # ============================================================================
-# 2. 数据预处理 - 转换为二元特征
+# 2. 数据预处理 - 转换for二元特征
 # ============================================================================
 print("\n" + "=" * 80)
 print("2. 数据预处理 - 创建二元特征")
@@ -53,7 +53,7 @@ df_binary['BMI_Normal'] = df['BMI'] <= 25
 df_binary['BMI_Overweight'] = (df['BMI'] > 25) & (df['BMI'] <= 30)
 df_binary['BMI_Obese'] = df['BMI'] > 30
 
-# 年龄分组
+# age分组
 df_binary['Age_Young'] = df['Age'] <= 4  # 18-44
 df_binary['Age_Middle'] = (df['Age'] > 4) & (df['Age'] <= 9)  # 45-64
 df_binary['Age_Senior'] = df['Age'] > 9  # 65+
@@ -72,7 +72,7 @@ df_binary['Income_High'] = df['Income'] > 6  # >$50k
 df_binary['Education_Low'] = df['Education'] <= 3
 df_binary['Education_High'] = df['Education'] > 3
 
-# 目标变量 - 合并为At-Risk（契合1.2节战略决策）
+# 目标变量 - 合并forAt-Risk（契合1.2节战略决策）
 df_binary['At-Risk'] = (df['Diabetes_012'] >= 1)  # Prediabetes OR Diabetes
 
 print(f"创建了 {len(df_binary.columns)} 个二元特征")
@@ -83,13 +83,13 @@ print(f"At-Risk样本数: {df_binary['At-Risk'].sum():,} ({df_binary['At-Risk'].
 # ============================================================================
 print("\n" + "=" * 80)
 print("3. 风险预测导向的关联规则挖掘")
-print("   策略：后项固定为 {At-Risk}，Lift表示风险放大倍数")
+print("   策略：后项固定for {At-Risk}，Lift表示风险放大倍数")
 print("=" * 80)
 
 # 全样本分析（关键修正：不能只在糖尿病子集内挖掘）
 print(f"\n全样本数: {len(df_binary):,} | At-Risk比例: {df_binary['At-Risk'].mean():.1%}")
 
-# 使用Apriori算法找频繁项集 - 双扫描策略（调整阈值加快计算）
+# usingApriori算法找频繁项集 - 双扫描策略（调整阈值加快计算）
 print("\n运行Apriori算法 (Pass 1: 常见模式, min_support=0.25)...")
 frequent_itemsets = apriori(df_binary, min_support=0.25, use_colnames=True)
 print(f"找到 {len(frequent_itemsets)} 个频繁项集 (support >= 0.25)")
@@ -102,14 +102,14 @@ print(f"找到 {len(frequent_itemsets_rare)} 个频繁项集 (support >= 0.05)")
 all_frequent = pd.concat([frequent_itemsets, frequent_itemsets_rare]).drop_duplicates()
 print(f"\n合并后频繁项集数: {len(all_frequent)}")
 
-# 生成关联规则 - 手动约束后项为At-Risk
+# 生成关联规则 - 手动约束后项forAt-Risk
 print("\n生成At-Risk风险预测规则...")
 
 # 计算At-Risk的基线概率（全人群）
 at_risk_baseline = df_binary['At-Risk'].mean()
 print(f"At-Risk基线概率: {at_risk_baseline:.2%}")
 
-# 为每个频繁项集手动计算与At-Risk的关联统计
+# for每个频繁项集手动计算与At-Risk的关联统计
 rules_list = []
 
 for idx, row in all_frequent.iterrows():
@@ -149,13 +149,13 @@ for idx, row in all_frequent.iterrows():
             'lift': lift
         })
 
-# 转换为DataFrame
+# 转换forDataFrame
 all_rules = pd.DataFrame(rules_list)
 
 if len(all_rules) > 0:
     all_rules = all_rules.sort_values('lift', ascending=False)
     print(f"\n找到 {len(all_rules)} 条有效规则 (consequent = At-Risk, Lift > 1.0)")
-    print(f"Lift范围: [{all_rules['lift'].min():.2f}, {all_rules['lift'].max():.2f}]")
+    print(f"Liftrange: [{all_rules['lift'].min():.2f}, {all_rules['lift'].max():.2f}]")
 else:
     print("错误：没有找到满足条件的规则！")
     import sys
@@ -211,7 +211,7 @@ for i, (idx, rule) in enumerate(top_rules.iterrows(), 1):
     print(f"\n{i}. {antecedents_str} → At-Risk{label}")
     print(f"   Lift={rule['lift']:.2f}x | Confidence={rule['confidence']:.2%} | Support={rule['support']:.3f}")
 
-# 特别报告关键模式
+# 特别report关键模式
 if metabolic_triad_rules:
     print("\n" + "=" * 80)
     print("✓ 发现 Metabolic Triad 协同放大 (HighBP + HighChol + Obesity):")
@@ -229,10 +229,10 @@ if stroke_bp_rules:
         print(f"  → 救援扫描成功捕获低频高危信号")
 
 # ============================================================================
-# 5. 可视化：风险协同效应的学术级展示
+# 5. Visualization：风险协同效应的学术级展示
 # ============================================================================
 print("\n" + "=" * 80)
-print("5. 可视化风险协同放大效应")
+print("5. Visualization风险协同放大效应")
 print("=" * 80)
 
 # 筛选Lift > 1.2的规则（降噪）
@@ -242,7 +242,7 @@ print(f"\n过滤后规则数: {len(risk_rules)} (Lift > 1.2)")
 # ============================================================================
 # 图A: Support-Lift Risk Plot（风险协同散点图）
 # ============================================================================
-# 增加画布宽度，为子图间距和标签预留足够空间
+# 增加画布宽度，for子图间距和标签预留足够空间
 fig, axes = plt.subplots(1, 2, figsize=(24, 8))
 
 # 图A：Support vs Lift散点图
@@ -262,7 +262,7 @@ ax1.axhline(y=2.0, color='red', linestyle='--', linewidth=2.5, alpha=0.9,
            label='Lift=2 (Risk Doubled)', zorder=1)
 
 # 手动注释关键点 - 优化标注位置和样式
-# 找到Metabolic Triad规则（最高Lift的代谢三联征）
+# 找到Metabolic Triad规则（highestLift的代谢三联征）
 metabolic_annotated = False
 for idx, rule in risk_rules.nlargest(50, 'lift').iterrows():
     antecedents_set = set(rule['antecedents'])
@@ -310,7 +310,7 @@ ax2 = axes[1]
 # 选取Top 10并生成临床描述
 top10 = risk_rules.nlargest(10, 'lift').copy()
 
-# 生成简短临床描述（替代R1, R2...）- 使用换行避免文字截断
+# 生成简短临床描述（替代R1, R2...）- using换行avoid文字截断
 rule_descriptions = []
 for idx, rule in top10.iterrows():
     antecedents = list(rule['antecedents'])
@@ -352,10 +352,10 @@ y_pos = np.arange(len(top10))
 ax2.barh(y_pos, top10['lift'].values, color='steelblue', 
         edgecolor='black', linewidth=1.2, alpha=0.8)
 
-# 设置Y轴标签为临床描述
+# 设置Y轴标签for临床描述
 ax2.set_yticks(y_pos)
 ax2.set_yticklabels(rule_descriptions, fontsize=10, verticalalignment='center')
-ax2.invert_yaxis()  # 最高Lift在顶部
+ax2.invert_yaxis()  # highestLift在顶部
 
 ax2.set_xlabel('Lift (Risk Amplification)', fontweight='bold', fontsize=13)
 ax2.set_ylabel('Risk Factor Combinations', fontweight='bold', fontsize=13, labelpad=10)
@@ -373,14 +373,14 @@ for i, (y, lift) in enumerate(zip(y_pos, top10['lift'].values)):
     ax2.text(lift + 0.08, y, f'{lift:.2f}', 
             va='center', fontsize=10, fontweight='bold', color='darkblue')
 
-# 关键优化：调整子图布局，为标签预留足够空间，增加子图间距避免重叠
+# 关键优化：调整子图布局，for标签预留足够空间，增加子图间距avoid重叠
 plt.subplots_adjust(left=0.18, right=0.97, bottom=0.08, top=0.94, wspace=0.5)
 
 # 确保exploration目录存在
 exploration_dir = OUTPUT_DIR / 'exploration'
 exploration_dir.mkdir(exist_ok=True)
 
-# 保存图表 - 使用高DPI和tight边界确保无截断
+# 保存图表 - using高DPI和tight边界确保无截断
 plt.savefig(exploration_dir / '07_arm_risk_synergy.png', 
            dpi=300, bbox_inches='tight', pad_inches=0.3)
 print("\n✓ 已保存: outputs/exploration/07_arm_risk_synergy.png")
@@ -449,7 +449,7 @@ print("=" * 80)
 
 print("\n方法论修正 (Methodological Correction):")
 print("  ✗ 旧方法: 在糖尿病子集内部挖掘 → 只见共现，不见因果")
-print("  ✓ 新方法: 全样本分析 + 后项固定为At-Risk → Lift具有政策含义")
+print("  ✓ 新方法: 全样本分析 + 后项固定forAt-Risk → Lift具有政策含义")
 
 print("\n策略说明 (Strategy):")
 print("  • Pass 1: 常见模式扫描 (min_support=0.25)")
@@ -497,6 +497,6 @@ print("\n\n✓ 学术贡献 (Academic Contribution):")
 print("  1. Beyond Co-occurrence: 从特征共现转向风险预测")
 print("  2. Synergistic Amplification: Metabolic Triad不是简单相加，而是协同放大")
 print("  3. Rescue Scan Validation: 稀有高危信号（Stroke+HighBP）成功捕获")
-print("  4. Justification for XGBoost: 为非线性交互建模提供实证依据")
+print("  4. Justification for XGBoost: for非线性交互建模提供实证依据")
 print("\n  → 这些发现证实：糖尿病风险是多因素协同的，而非简单线性叠加")
-print("  → Lift > 2.0的规则为临床多维度综合干预提供了精准靶点")
+print("  → Lift > 2.0的规则for临床多维度综合干预提供了精准靶点")

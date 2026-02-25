@@ -13,10 +13,10 @@ df = pd.read_csv(profiles_file)
 # Define feature ranges and thresholds for identifying core features
 feature_info = {
     'metabolic_baseline': {'name': 'BMI', 'name_cn': 'BMI', 'range': (12, 98), 'high_threshold': 35, 'very_high': 40},
-    'chronic_disease_burden': {'name': 'Chronic Disease', 'name_cn': '慢性病负担', 'range': (0, 5), 'high_threshold': 2.0, 'very_high': 2.5},
-    'lifestyle_risk': {'name': 'Lifestyle Risk', 'name_cn': '生活方式风险', 'range': (0, 3), 'high_threshold': 1.5, 'very_high': 2.0},
-    'substance_risk': {'name': 'Substance Risk', 'name_cn': '物质使用风险', 'range': (0, 2), 'high_threshold': 1.0, 'very_high': 1.5},
-    'ses_vulnerability': {'name': 'SES Vulnerability', 'name_cn': '社会经济脆弱性', 'range': (3, 15), 'high_threshold': 8.0, 'very_high': 10.0}
+    'chronic_disease_burden': {'name': 'Chronic Disease', 'name_cn': 'chronic disease burden', 'range': (0, 5), 'high_threshold': 2.0, 'very_high': 2.5},
+    'lifestyle_risk': {'name': 'Lifestyle Risk', 'name_cn': 'lifestyle risk', 'range': (0, 3), 'high_threshold': 1.5, 'very_high': 2.0},
+    'substance_risk': {'name': 'Substance Risk', 'name_cn': 'substance use risk', 'range': (0, 2), 'high_threshold': 1.0, 'very_high': 1.5},
+    'ses_vulnerability': {'name': 'SES Vulnerability', 'name_cn': 'socioeconomic vulnerability', 'range': (3, 15), 'high_threshold': 8.0, 'very_high': 10.0}
 }
 
 # Label translations
@@ -34,7 +34,7 @@ label_translations = {
     'Poor Lifestyle Group': '不良生活方式组',
     'Metabolic Risk Group': '代谢风险组',
     'Multi-Morbidity Group': '多重慢病组',
-    'Substance Risk Group': '物质使用风险组',
+    'Substance Risk Group': 'substance use risk组',
     'Vulnerable Group': '脆弱群体组'
 }
 
@@ -51,25 +51,25 @@ def identify_core_features(row):
     
     # Check chronic_disease_burden
     if row['chronic_disease_burden'] >= feature_info['chronic_disease_burden']['very_high']:
-        core_features.append(f"极高慢性病负担 ({row['chronic_disease_burden']:.2f})")
+        core_features.append(f"极高chronic disease burden ({row['chronic_disease_burden']:.2f})")
     elif row['chronic_disease_burden'] >= feature_info['chronic_disease_burden']['high_threshold']:
-        core_features.append(f"高慢性病负担 ({row['chronic_disease_burden']:.2f})")
+        core_features.append(f"高chronic disease burden ({row['chronic_disease_burden']:.2f})")
     
     # Check lifestyle_risk
     if row['lifestyle_risk'] >= feature_info['lifestyle_risk']['very_high']:
-        core_features.append(f"极高生活方式风险 ({row['lifestyle_risk']:.2f})")
+        core_features.append(f"极高lifestyle risk ({row['lifestyle_risk']:.2f})")
     elif row['lifestyle_risk'] >= feature_info['lifestyle_risk']['high_threshold']:
-        core_features.append(f"高生活方式风险 ({row['lifestyle_risk']:.2f})")
+        core_features.append(f"高lifestyle risk ({row['lifestyle_risk']:.2f})")
     
     # Check substance_risk
     if row['substance_risk'] >= feature_info['substance_risk']['high_threshold']:
-        core_features.append(f"高物质使用风险 ({row['substance_risk']:.2f})")
+        core_features.append(f"高substance use risk ({row['substance_risk']:.2f})")
     
     # Check ses_vulnerability
     if row['ses_vulnerability'] >= feature_info['ses_vulnerability']['very_high']:
-        core_features.append(f"极高社会经济脆弱性 ({row['ses_vulnerability']:.1f})")
+        core_features.append(f"极高socioeconomic vulnerability ({row['ses_vulnerability']:.1f})")
     elif row['ses_vulnerability'] >= feature_info['ses_vulnerability']['high_threshold']:
-        core_features.append(f"高社会经济脆弱性 ({row['ses_vulnerability']:.1f})")
+        core_features.append(f"高socioeconomic vulnerability ({row['ses_vulnerability']:.1f})")
     
     # If no high features, identify the relatively higher ones
     if not core_features:
@@ -123,10 +123,10 @@ for idx, row in df.iterrows():
         '糖尿病率': f"{row['Diabetes_Rate']:.2f}%",
         '标签': label_translations.get(row['Label'], row['Label']),
         'BMI': f"{row['metabolic_baseline']:.2f}",
-        '慢性病负担': f"{row['chronic_disease_burden']:.2f}",
-        '生活方式风险': f"{row['lifestyle_risk']:.2f}",
-        '物质使用风险': f"{row['substance_risk']:.2f}",
-        '社会经济脆弱性': f"{row['ses_vulnerability']:.2f}",
+        'chronic disease burden': f"{row['chronic_disease_burden']:.2f}",
+        'lifestyle risk': f"{row['lifestyle_risk']:.2f}",
+        'substance use risk': f"{row['substance_risk']:.2f}",
+        'socioeconomic vulnerability': f"{row['ses_vulnerability']:.2f}",
         '核心特征': identify_core_features(row)
     })
 
@@ -139,12 +139,12 @@ print(f"✓ 详细总结已保存至: {detailed_output}")
 print("\n" + "="*120)
 print("说明")
 print("="*120)
-print("\n• 核心特征: 基于特征值相对范围识别出的显著特征")
+print("\n• 核心特征: 基于特征值相对range识别出的显著特征")
 print("• 阈值设定:")
 print("  - BMI: 高 ≥35, 极高 ≥40")
-print("  - 慢性病负担: 高 ≥2.0, 极高 ≥2.5")
-print("  - 生活方式风险: 高 ≥1.5, 极高 ≥2.0")
-print("  - 社会经济脆弱性: 高 ≥8.0, 极高 ≥10.0")
-print("  - 物质使用风险: 高 ≥1.0")
-print("\n• 簇按糖尿病患病率排序 (簇0=最低, 簇5=最高)")
+print("  - chronic disease burden: 高 ≥2.0, 极高 ≥2.5")
+print("  - lifestyle risk: 高 ≥1.5, 极高 ≥2.0")
+print("  - socioeconomic vulnerability: 高 ≥8.0, 极高 ≥10.0")
+print("  - substance use risk: 高 ≥1.0")
+print("\n• 簇按糖尿病患病率排序 (簇0=最低, 簇5=highest)")
 print("="*120)

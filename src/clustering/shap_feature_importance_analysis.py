@@ -54,11 +54,11 @@ FEATURE_DISPLAY_NAMES = [
 ]
 
 FEATURE_NAMES_CN = {
-    'chronic_disease_burden': '慢性病负担',
-    'BMI': 'BMI代谢基线',
-    'lifestyle_risk': '生活方式风险',
-    'substance_risk': '物质使用风险',
-    'ses_vulnerability': '社会经济脆弱性'
+    'chronic_disease_burden': 'chronic disease burden',
+    'BMI': 'BMI Metabolic Baseline',
+    'lifestyle_risk': 'lifestyle risk',
+    'substance_risk': 'substance use risk',
+    'ses_vulnerability': 'socioeconomic vulnerability'
 }
 
 TARGET = 'cluster'  # Cluster assignment (0-5), NOT diabetes status
