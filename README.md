@@ -22,35 +22,54 @@ CDC_DCDC_Diabetes_Project/
 │   └── Dataset Description.txt    # Data dictionary
 ├── src/                           # Source code
 │   ├── EDA/                       # Exploratory Data Analysis scripts
-│   ├── clustering/                # Clustering models and analysis
+│   │   └── association_rule_mining.py
+│   ├── clustering/                # Clustering models and analysis (25 scripts)
 │   │   ├── kmeans.py              # 5-feature K-Means clustering
 │   │   ├── kmeans_6features_with_age.py
 │   │   ├── kmeans_6features_with_sex.py
-│   │   └── shap_feature_importance_analysis.py
-│   ├── classification/            # Classification models
-│   │   ├── 01_baseline_logistic_regression.py
-│   │   ├── 02_random_forest.py
-│   │   ├── 03_xgboost.py
-│   │   ├── 04_xgboost_tuning.py
-│   │   └── 05_model_comparison.py
+│   │   ├── shap_feature_importance_analysis.py
+│   │   ├── vif_multicollinearity_analysis*.py (3 scripts)
+│   │   ├── cluster_profiling*.py  (3 scripts)
+│   │   └── ... (scaling analysis, validation scripts)
+│   ├── classification/            # Classification models (7 scripts)
+│   │   ├── 01_data_preparation.py
+│   │   ├── 02_baseline_logistic_regression.py
+│   │   ├── 03_random_forest.py
+│   │   ├── 04_xgboost.py
+│   │   ├── 05_xgboost_hyperparameter_tuning.py
+│   │   ├── 06_comprehensive_model_comparison.py
+│   │   └── 07_export_shap_summary.py
 │   └── demographic_risk_analysis.py
 ├── outputs/                       # Results and visualizations
 │   ├── clustering/                # Clustering outputs
-│   │   ├── Three_Model_Comparison_5feat_vs_6feat_Age_vs_6feat_Sex.md
+│   │   ├── profiling/             # Cluster profiling and validation
+│   │   │   └── final_20260221_222939/
+│   │   │       ├── cluster_summary_*.csv (summary tables)
+│   │   │       ├── age_validation/ (age distribution analysis)
+│   │   │       ├── pca_validation/ (PCA projection validation)
+│   │   │       └── shap_analysis/  (SHAP feature importance)
 │   │   ├── fig/                   # Clustering figures
 │   │   ├── log/                   # K-Means run logs
-│   │   ├── profiling/             # Cluster profiling results
 │   │   └── vif_analysis/          # VIF collinearity analysis
-│   ├── classification/            # Classification outputs
+│   ├── classification/            # Classification outputs (25 files)
 │   │   ├── model_comparison_complete.csv
-│   │   ├── xgboost_metrics.csv
-│   │   └── shap_summary_importance.csv
-│   └── exploration/               # EDA outputs
-│       ├── association_rules.csv
+│   │   ├── *_metrics.csv          (LR, RF, XGBoost metrics)
+│   │   ├── *_predictions.csv      (model predictions)
+│   │   ├── shap_summary_importance.csv
+│   │   └── xgboost_tuning_comparison.csv
+│   └── exploration/               # EDA outputs (13 files)
+│       ├── association_rules*.csv (ARM analysis)
 │       ├── lifestyle_risk_ranking.csv
-│       └── demographic_risk_by_factor.csv
+│       ├── demographic_risk_by_factor.csv
+│       └── ARM_VISUALIZATION_GUIDE.md
 ├── models/                        # Saved model files
-├── notebooks/                     # Jupyter notebooks
+├── notebooks/                     # Jupyter notebooks (7 files)
+│   ├── EDA_3.0.ipynb             # Initial EDA
+│   ├── EDA_3.1.ipynb             # Extended EDA
+│   ├── EDA_3.2.ipynb             # Advanced EDA
+│   ├── FAIDM.ipynb               # Main analysis notebook
+│   ├── correlation_analysis_sagemaker.py
+│   └── feature_correlations.csv
 ├── reports/                       # Final reports
 └── logs/                          # Execution logs
 ```
