@@ -23,3 +23,7 @@ joblib>=1.2.0
 # Optional: Jupyter support
 # jupyter>=1.0.0
 # ipykernel>=6.0.0
+
+# Boosting and explainability
+xgboost>=1.7.0
+shap>=0.42.0

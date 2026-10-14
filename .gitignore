@@ -52,7 +52,6 @@ env/
 doc/
 docs/
 # Allow project structure
-!PROJECT_STRUCTURE.md
 
 # Outputs folder - Ignore all outputs except final results
 outputs/clustering/*
@@ -96,3 +95,9 @@ logs/*.log
 
 # Root level CSV files (generated reports)
 /*.csv
+
+# ---- local only (not uploaded) ----
+data/**/*.csv
+notebooks/FAIDM*.ipynb
+notebooks/*.csv
+PROJECT_STRUCTURE.md
